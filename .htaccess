@@ -1,0 +1,79 @@
+# ELOK – elok-agency.pl (strona bez WordPressa)
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+Options -Indexes
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# bez www
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://elok-agency.pl%{REQUEST_URI} [R=301,L]
+# zawsze https
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# stare adresy z WordPressa -> nowe strony
+RewriteRule ^polityka-prywatnosci/?$ https://%{HTTP_HOST}/polityka-prywatnosci.html [R=301,L]
+RewriteRule ^regulamin/?$ https://%{HTTP_HOST}/regulamin.html [R=301,L]
+RewriteRule ^cookies/?$ https://%{HTTP_HOST}/cookies.html [R=301,L]
+RewriteRule ^rezerwacje/?$ https://%{HTTP_HOST}/konsultacja.html [R=301,L]
+RewriteRule ^referencje/?$ https://%{HTTP_HOST}/realizacje.html [R=301,L]
+RewriteRule ^blog/?$ https://%{HTTP_HOST}/blog.html [R=301,L]
+RewriteRule ^o-nas/?$ https://%{HTTP_HOST}/o-nas.html [R=301,L]
+RewriteRule ^kontakt/?$ https://%{HTTP_HOST}/kontakt.html [R=301,L]
+RewriteRule ^cennik/?$ https://%{HTTP_HOST}/cennik.html [R=301,L]
+RewriteRule ^uslugi/?$ https://%{HTTP_HOST}/automatyzacje.html [R=301,L]
+RewriteRule ^marketing/?$ https://%{HTTP_HOST}/marketing.html [R=301,L]
+RewriteRule ^development/?$ https://%{HTTP_HOST}/strony.html [R=301,L]
+RewriteRule ^automatyzacje/?$ https://%{HTTP_HOST}/automatyzacje.html [R=301,L]
+RewriteRule ^vip-business-launch/?$ https://%{HTTP_HOST}/ [R=301,L]
+RewriteRule ^bio/?$ https://%{HTTP_HOST}/ [R=301,L]
+RewriteRule ^404-fail/?$ https://%{HTTP_HOST}/ [R=301,L]
+RewriteRule ^brief/?$ https://%{HTTP_HOST}/konsultacja.html [R=301,L]
+RewriteRule ^brief-vip/?$ https://%{HTTP_HOST}/konsultacja.html [R=301,L]
+RewriteRule ^marketing-brief/?$ https://%{HTTP_HOST}/konsultacja.html [R=301,L]
+RewriteRule ^development-brief/?$ https://%{HTTP_HOST}/konsultacja.html [R=301,L]
+RewriteRule ^automatyzacje-brief/?$ https://%{HTTP_HOST}/konsultacja.html [R=301,L]
+RewriteRule ^case-studies/serwis-samochodowy-premium/?$ https://%{HTTP_HOST}/realizacja-serwis.html [R=301,L]
+RewriteRule ^case-studies/indywidualny-panel-firmowy/?$ https://%{HTTP_HOST}/realizacja-panel.html [R=301,L]
+RewriteRule ^case-studies/?$ https://%{HTTP_HOST}/realizacje.html [R=301,L]
+RewriteRule ^sitemap_index\.xml/?$ https://%{HTTP_HOST}/sitemap.xml [R=301,L]
+RewriteRule ^wp-sitemap\.xml/?$ https://%{HTTP_HOST}/sitemap.xml [R=301,L]
+RewriteRule ^feed/?$ https://%{HTTP_HOST}/blog.html [R=301,L]
+RewriteRule ^sprzedaz-na-sterydach/?$ https://%{HTTP_HOST}/blog-sprzedaz-na-sterydach.html [R=301,L]
+RewriteRule ^automatyzacja-to-nie-tylko-oszczednosc-czasu-to-jedyny-sposob-na-skalowanie-bez-chaosu/?$ https://%{HTTP_HOST}/blog-automatyzacja-skalowanie.html [R=301,L]
+RewriteRule ^tani-wordpress-to-najdrozsza-inwestycja-dlaczego-jakosc-kodu-wplywa-na-twoje-przychody/?$ https://%{HTTP_HOST}/blog-tani-wordpress.html [R=301,L]
+RewriteRule ^reklama-to-nie-hazard-dlaczego-twoje-kampanie-na-facebooku-i-google-nie-dowoza-wynikow/?$ https://%{HTTP_HOST}/blog-reklama-to-nie-hazard.html [R=301,L]
+RewriteRule ^marketingiem-nie-naprawisz-slabego-produktu-ale-bez-niego-nikt-nie-pozna-tego-dobrego/?$ https://%{HTTP_HOST}/blog-marketing-i-produkt.html [R=301,L]
+RewriteRule ^facebook-ads-w-2025-dlaczego-twoje-stare-strategie-przestaly-dzialac-i-jak-to-naprawic/?$ https://%{HTTP_HOST}/blog-facebook-ads.html [R=301,L]
+RewriteRule ^google-ads-to-matematyka-nie-magia-jak-przestac-placic-podatek-od-niewiedzy/?$ https://%{HTTP_HOST}/blog-google-ads.html [R=301,L]
+
+# adres bez .html (np. /cennik) -> /cennik.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([a-z0-9-]+)/?$ https://%{HTTP_HOST}/$1.html [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set X-Frame-Options "SAMEORIGIN"
+<FilesMatch "\.(html)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+<FilesMatch "\.(css|js)$">
+Header set Cache-Control "public, max-age=86400"
+</FilesMatch>
+<FilesMatch "\.(jpg|jpeg|png|webp|svg|ico|mp4)$">
+Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+<Files "ustawienia.js">
+Header set Cache-Control "no-cache"
+</Files>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript image/svg+xml application/xml text/plain
+</IfModule>
