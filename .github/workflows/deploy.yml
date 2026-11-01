@@ -1,0 +1,48 @@
+# Wgrywanie strony na serwer LH.pl
+#  - gałąź "test" → test.elok-agency.pl
+#  - gałąź "main" → elok-agency.pl (po zatwierdzeniu w panelu)
+# Hasła: Settings → Secrets and variables → Actions → FTP_USER, FTP_PASSWORD
+name: Wgraj strone
+on:
+  push:
+    branches: [main, test]
+  workflow_dispatch:
+concurrency: deploy-${{ github.ref_name }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wgraj przez FTP (proba 1)
+        id: ftp1
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: serwer321493.lh.pl
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ github.ref_name == 'main' && './elok-agency.pl/' || './test.elok-agency.pl/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            _zrodla/**
+            README.md
+            ustawienia.js
+      - name: Wgraj przez FTP (proba 2)
+        if: steps.ftp1.outcome == 'failure'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: serwer321493.lh.pl
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ github.ref_name == 'main' && './elok-agency.pl/' || './test.elok-agency.pl/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            _zrodla/**
+            README.md
+            ustawienia.js

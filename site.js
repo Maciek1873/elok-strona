@@ -145,7 +145,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  var MF=['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'],MG=['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'],DF=['niedziela','poniedziałek','wtorek','środa','czwartek','piątek','sobota'];
  var now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),max=new Date(today);max.setDate(max.getDate()+60);
  var view=new Date(today.getFullYear(),today.getMonth(),1),selD=null,selT=null;
- var API='https://panel.elok-agency.pl/strona/',LIVE=/(^|\.)elok-agency\.pl$/.test(location.hostname),BUSY={},OFF={};
+ var API='https://panel.elok-agency.pl/strona/',LIVE=/^(www\.)?elok-agency\.pl$/.test(location.hostname),BUSY={},OFF={};
  function p2(n){return (n<10?'0':'')+n;} function ymd(d){return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());}
  var grid=document.getElementById('cgrid'),lab=document.getElementById('clab'),prev=document.getElementById('cprev'),next=document.getElementById('cnext'),slotsEl=document.getElementById('slots'),sd=document.getElementById('slotdate'),sum=document.getElementById('bsum'),form=document.getElementById('bform'),done=document.getElementById('bdone');
  function fmt(d){return DF[d.getDay()]+', '+d.getDate()+' '+MG[d.getMonth()];}
@@ -258,7 +258,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
 [].forEach.call(document.querySelectorAll('.totop'),function(b){b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});});
 /* ===== własne statystyki (bez cookies, bez IP) -> panel ===== */
 (function(){var EP='https://panel.elok-agency.pl/strona/?a=ev';
- if(!/(^|\.)elok-agency\.pl$/.test(location.hostname))return;
+ if(!/^(www\.)?elok-agency\.pl$/.test(location.hostname))return;
  var q=location.search;
  try{if(/[?&]nielicz=1/.test(q))localStorage.setItem('elok_ja','1');if(/[?&]nielicz=0/.test(q))localStorage.removeItem('elok_ja');if(localStorage.getItem('elok_ja')==='1'){window.elokEv=function(){};return;}}catch(e){}
  function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v);}catch(e){return null;}}
@@ -291,6 +291,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
    Identyfikatory ustawiasz w panelu: panel.elok-agency.pl/strona/admin.php -> Podłączenia */
 (function(){var C=window.ELOK_CFG||{},CFG={clarity:C.clarity||'',ga4:C.ga4||'',metaPixel:C.metaPixel||'',tiktokPixel:C.tiktokPixel||'',gads:C.gads||'',gadsLabel:C.gadsLabel||''};
  window.elokKonwersja=function(){try{if(window.fbq)fbq('track','Schedule');if(window.gtag){gtag('event','generate_lead');if(CFG.gads&&CFG.gadsLabel)gtag('event','conversion',{send_to:CFG.gads+'/'+CFG.gadsLabel});}if(window.ttq)ttq.track('SubmitForm');}catch(e){}};
+ document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('[data-cookies]'):null;if(!a)return;e.preventDefault();try{localStorage.removeItem('elok_zgoda');}catch(x){}location.reload();});
  var any=CFG.clarity||CFG.ga4||CFG.metaPixel||CFG.tiktokPixel||CFG.gads;if(!any)return;
  function get(){try{return localStorage.getItem('elok_zgoda');}catch(e){return null;}}
  function set(v){try{localStorage.setItem('elok_zgoda',v);}catch(e){}}
