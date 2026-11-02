@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PartsPlayers · Panel sprzedaży</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Panel sklepu z częściami Porsche: grafitowe menu, jasny obszar pracy, żółty akcent marki PartsPlayers.
+   Jeden spójny wygląd (jasny), kolory ustawione jawnie. */
+:root{
+  --bg:#F3F3F1; --card:#FFFFFF; --soft:#F8F8F6; --line:#E6E5E1; --line2:#D6D4CE;
+  --ink:#141414; --ink2:#46443F; --mut:#7C7A74;
+  --side:#121212; --side2:#1C1C1C; --sline:#2A2A2A; --smut:#9A9891;
+  --acc:#F9C231; --acc2:#E5AC12; --accs:#FFF6D9;
+  --ok:#23864F; --oks:#E6F4EC; --warn:#B9760E; --warns:#FDF1DC; --bad:#C2412D; --bads:#FBE8E4; --info:#2E6FB8; --infos:#E6EFFA; --vio:#6B4FB3; --vios:#EFEAF9;
+  --f-d:'Barlow Condensed','Arial Narrow',Arial,sans-serif; --f-b:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif; --f-m:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+.demo{background:var(--acc);color:var(--ink);font-size:13px;font-weight:600;text-align:center;padding:7px max(16px,env(safe-area-inset-right,0px)) 7px max(16px,env(safe-area-inset-left,0px))}
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:calc(100vh - 34px)}
+/* menu */
+.side{background:var(--side);color:#EDEDEA;padding:22px 14px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;align-items:center;gap:11px;padding:0 8px}
+.brand i{width:38px;height:38px;border-radius:11px;background:var(--acc);display:grid;place-items:center;color:var(--ink);font-style:normal;font-family:var(--f-d);font-weight:700;font-size:20px}
+.brand b{display:block;font-family:var(--f-d);font-size:22px;letter-spacing:.03em;text-transform:uppercase;line-height:1}
+.brand b span{color:var(--acc)}
+.brand small{display:block;color:var(--smut);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:3px}
+nav{display:grid;gap:2px}
+nav .grp{color:#6E6C66;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 12px 6px}
+nav button{display:flex;align-items:center;gap:11px;text-align:left;background:none;border:0;border-radius:10px;padding:10px 12px;color:var(--smut);font-weight:500;cursor:pointer;width:100%}
+nav button svg{width:18px;height:18px;flex:none}
+nav button:hover{background:var(--side2);color:#fff}
+nav button.on{background:var(--side2);color:#fff;box-shadow:inset 3px 0 var(--acc)}
+nav button em{margin-left:auto;font-style:normal;font-size:12px;font-weight:700;background:var(--acc);color:var(--ink);border-radius:999px;padding:0 8px;min-width:22px;text-align:center}
+nav button:focus-visible,.btn:focus-visible,.chip:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.links{margin-top:auto;display:grid;gap:9px;padding:14px;border:1px solid var(--sline);border-radius:14px;font-size:13px;color:var(--smut)}
+.links div{display:flex;align-items:center;gap:9px}
+.dot{width:8px;height:8px;border-radius:50%;background:#3ECF7E;flex:none;box-shadow:0 0 0 3px rgba(62,207,126,.15)}
+.links .by{font-size:11.5px;color:#6E6C66;border-top:1px solid var(--sline);padding-top:9px}
+/* praca */
+.main{min-width:0;padding:24px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1220px;margin:0 auto;display:grid;gap:18px}
+.view[hidden]{display:none}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+h1{font-family:var(--f-d);font-size:40px;line-height:1;margin:0;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+.head p{color:var(--mut);margin:6px 0 0;max-width:66ch}
+h2{font-family:var(--f-d);font-size:21px;text-transform:uppercase;letter-spacing:.04em;margin:0;line-height:1.1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;border:1px solid var(--line2);background:var(--card);padding:10px 15px;font-weight:600;cursor:pointer;white-space:nowrap;transition:border-color .2s,background .2s,transform .15s}
+.btn:hover{border-color:var(--ink)}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.pri:hover{background:#2A2A2A}
+.btn.acc{background:var(--acc);border-color:var(--acc);color:var(--ink)}
+.btn.acc:hover{background:var(--acc2);border-color:var(--acc2)}
+.btn.sm{padding:7px 11px;font-size:13.5px;border-radius:9px}
+.btn svg{width:16px;height:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;min-width:0;box-shadow:0 1px 2px rgba(20,18,10,.03)}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px 0;flex-wrap:wrap}
+.ch p{color:var(--mut);margin:3px 0 0;font-size:13.5px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.k{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:4px}
+.k small{color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.k b{font-family:var(--f-d);font-size:38px;line-height:1.05;font-variant-numeric:tabular-nums}
+.k span{color:var(--mut);font-size:13px}
+.k span i{font-style:normal;color:var(--ok);font-weight:600}
+.k.dark{background:var(--side);border-color:var(--side);color:#fff}
+.k.dark small,.k.dark span{color:var(--smut)}
+.k.dark b{color:var(--acc)}
+.g2{display:grid;grid-template-columns:1.45fr 1fr;gap:14px}
+.g2e{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* wykres */
+.chart{padding:14px 20px 18px}
+.chart svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;color:var(--mut);font-size:13px;padding:0 20px 16px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+/* tabele */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--mut);font-weight:600;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--soft)}
+td{padding:12px 20px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover td{background:var(--soft)}
+.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mono{font-family:var(--f-m);font-size:12px;color:var(--mut)}
+.sub{color:var(--mut);font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-ok{color:var(--ok);background:var(--oks)}.p-warn{color:var(--warn);background:var(--warns)}.p-bad{color:var(--bad);background:var(--bads)}.p-info{color:var(--info);background:var(--infos)}.p-vio{color:var(--vio);background:var(--vios)}.p-mut{color:var(--ink2);background:#EEEDE9}
+.src{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;border-radius:6px;padding:2px 7px;letter-spacing:.02em}
+.src.s{background:var(--ink);color:#fff}.src.a{background:#FF5A00;color:#fff}
+.up{color:var(--bad);font-weight:600}.dn{color:var(--ok);font-weight:600}
+/* automaty feed */
+.feed{display:grid;padding:10px 0 6px}
+.fe{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;padding:10px 20px}
+.fe i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-style:normal}
+.fe i svg{width:17px;height:17px}
+.fe b{display:block;font-weight:600;font-size:14.5px}
+.fe span{color:var(--mut);font-size:13px}
+.fe time{color:var(--mut);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:2px}
+/* proces */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:16px 20px 20px}
+.ps{position:relative;border-radius:14px;padding:12px 14px;background:var(--soft);border:1px solid var(--line)}
+.ps small{color:var(--mut);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.ps b{display:block;font-family:var(--f-d);font-size:30px;line-height:1.1}
+.ps span{font-size:12.5px;color:var(--mut)}
+.ps.hot{background:var(--accs);border-color:#F2D98C}
+/* filtry */
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line2);background:var(--card);border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;cursor:pointer}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:0 12px;min-width:240px}
+.search input{border:0;outline:0;background:none;padding:10px 0;width:100%}
+.search svg{width:16px;height:16px;color:var(--mut)}
+/* szuflada zamówienia */
+.ov{position:fixed;inset:0;background:rgba(18,18,18,.42);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);z-index:41;transform:translateX(102%);transition:transform .28s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:-30px 0 60px rgba(0,0,0,.15)}
+.drawer.on{transform:none}
+.dh{background:var(--card);border-bottom:1px solid var(--line);padding:calc(18px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 16px 20px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.dh h3{font-family:var(--f-d);font-size:28px;margin:0;line-height:1;text-transform:uppercase}
+.x{width:38px;height:38px;border-radius:10px;border:1px solid var(--line2);background:var(--card);cursor:pointer;display:grid;place-items:center;flex:none}
+.db{overflow:auto;padding:16px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 20px;display:grid;gap:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.box h4{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:14px}
+.kv span{color:var(--mut)}
+.items div{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.items div:last-child{border-bottom:0}
+.tl{display:grid;gap:0}
+.tl div{display:grid;grid-template-columns:22px 1fr auto;gap:10px;padding:7px 0;font-size:14px;align-items:start}
+.tl i{width:12px;height:12px;border-radius:50%;margin-top:5px;background:var(--line2);box-shadow:0 0 0 3px #EEEDE9}
+.tl div.done i{background:var(--ok);box-shadow:0 0 0 3px var(--oks)}
+.tl div.next i{background:var(--acc);box-shadow:0 0 0 3px var(--accs)}
+.tl time{color:var(--mut);font-size:12.5px;white-space:nowrap}
+.dact{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.label{border:2px dashed var(--line2);border-radius:14px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--soft)}
+.bars{width:86px;height:56px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px)}
+/* automaty */
+.autos{display:grid;padding:6px 0}
+.au{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.au:last-child{border-bottom:0}
+.au i{width:44px;height:44px;border-radius:13px;background:var(--accs);display:grid;place-items:center;font-style:normal;color:var(--ink)}
+.au i svg{width:20px;height:20px}
+.au b{display:block}.au span{color:var(--mut);font-size:13.5px}
+.sw{position:relative;width:46px;height:27px;flex:none}
+.sw input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:1}
+.sw u{position:absolute;inset:0;border-radius:999px;background:var(--line2);transition:background .2s}
+.sw u::after{content:"";position:absolute;left:3px;top:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.sw input:checked+u{background:var(--ok)}
+.sw input:checked+u::after{transform:translateX(19px)}
+.sw input:focus-visible+u{outline:2px solid var(--acc);outline-offset:2px}
+/* reguły */
+.rules{display:grid;padding:6px 0}
+.rule{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line)}
+.rule:last-child{border-bottom:0}
+.rule b{display:block}.rule span{color:var(--mut);font-size:13.5px}
+.val{font-family:var(--f-m);font-size:13px;background:var(--soft);border:1px solid var(--line2);border-radius:8px;padding:6px 10px;white-space:nowrap}
+.calc{padding:16px 20px 20px;display:grid;gap:10px}
+.calc label{font-size:13px;color:var(--mut);display:block;margin-bottom:4px}
+.calc input,.calc select{width:100%;background:var(--soft);border:1px solid var(--line2);border-radius:10px;padding:10px 12px}
+.calc .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.res{border-top:1px dashed var(--line2);padding-top:12px;display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.res div{display:flex;justify-content:space-between}
+.res .tot{font-family:var(--f-d);font-size:30px}
+.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 20px;border-top:1px solid var(--line);background:var(--soft);border-radius:0 0 18px 18px}
+.chk{width:18px;height:18px;accent-color:var(--ink)}
+.car{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:2px 8px;white-space:nowrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(22px + env(safe-area-inset-bottom,0px));background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;font-weight:600;z-index:60;box-shadow:0 20px 40px rgba(0,0,0,.25);display:flex;gap:10px;align-items:center;max-width:calc(100% - 32px)}
+.toast i{width:20px;height:20px;border-radius:50%;background:var(--acc);display:grid;place-items:center;color:var(--ink);font-style:normal;font-size:12px;flex:none}
+.toast[hidden]{display:none}
+.mtop{display:none}
+@media(max-width:1060px){.kpis{grid-template-columns:1fr 1fr}.g2,.g2e{grid-template-columns:1fr}.pipe{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){
+ .app{grid-template-columns:minmax(0,1fr)}
+ .side{position:sticky;top:0;z-index:20;height:auto;flex-direction:column;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+ .brand{padding:0}
+ nav{display:flex;overflow-x:auto;gap:4px;scrollbar-width:none;margin:0 -4px}
+ nav::-webkit-scrollbar{display:none}
+ nav .grp{display:none}
+ nav button{flex:none;width:auto;padding:8px 12px;background:var(--side2)}
+ nav button svg{display:none}
+ nav button.on{background:var(--acc);color:var(--ink);box-shadow:none}
+ nav button.on em{background:var(--ink);color:var(--acc)}
+ .links{display:none}
+ h1{font-size:32px}
+ .pipe{grid-template-columns:1fr 1fr}
+ .search{min-width:0;width:100%}
+ .hide-m{display:none}
+ td,th{padding:11px 14px}
+ .dact{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo">Wersja pokazowa przygotowana przez ELOK dla PartsPlayers · dane, klienci i numery części są przykładowe</div>
+<div class="app">
+<aside class="side">
+ <div class="brand"><i>PP</i><div><b>Parts<span>Players</span></b><small>Panel sprzedaży</small></div></div>
+ <nav id="nav" aria-label="Sekcje panelu">
+  <div class="grp">Sprzedaż</div>
+  <button data-v="pulpit" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Pulpit</button>
+  <button data-v="zamowienia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8a3 3 0 016 0"/></svg>Zamówienia<em id="c-ord">5</em></button>
+  <button data-v="wysylki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>Wysyłki</button>
+  <button data-v="faktury"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h4"/></svg>Faktury</button>
+  <button data-v="klienci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-4 3.5-6 6.5-6s5.5 2 6.5 6M16 4a3.5 3.5 0 010 7M18 14c2 .6 3.3 2.6 3.8 6"/></svg>Klienci</button>
+  <div class="grp">Katalog</div>
+  <button data-v="ceny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-9h8v8l-9 9z"/><circle cx="16" cy="8" r="1.5"/></svg>Ceny i stany<em id="c-pr">6</em></button>
+  <button data-v="automaty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Automaty</button>
+ </nav>
+ <div class="links">
+  <div><i class="dot"></i>Sklep IdoSell</div>
+  <div><i class="dot"></i>Allegro</div>
+  <div><i class="dot"></i>DPD i InPost</div>
+  <div><i class="dot"></i>Faktury i KSeF</div>
+  <div class="by">Panel ELOK · elok-agency.pl</div>
+ </div>
+</aside>
+
+<main class="main"><div class="wrap">
+
+<!-- ===== PULPIT ===== -->
+<section class="view" id="v-pulpit"><div class="wrap">
+ <div class="head"><div><h1>Dzień dobry, Piotrze</h1><p>Czwartek, 5 listopada. Od rana panel sam wystawił 11 faktur, przygotował 6 etykiet i zaktualizował ceny 212 części. Ty masz do zrobienia tylko dwie rzeczy.</p></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-go="ceny">Zmiany cen (6)</button><button class="btn acc" data-go="wysylki">Nadaj paczki</button></div></div>
+ <div class="kpis">
+  <div class="k dark"><small>Sprzedaż dziś</small><b>8 437 zł</b><span>14 zamówień · średnio 603 zł</span></div>
+  <div class="k"><small>Ten miesiąc</small><b>41 280 zł</b><span><i>+18%</i> do października</span></div>
+  <div class="k"><small>Do wysłania</small><b id="k-send">5</b><span>kurier DPD odbiera o 16:00</span></div>
+  <div class="k"><small>Czas zaoszczędzony</small><b>3 h 40 min</b><span>dziś, przez automaty</span></div>
+ </div>
+ <div class="card">
+  <div class="ch"><div><h2>Zamówienia krok po kroku</h2><p>Gdzie dziś są zamówienia. Szare kroki panel robi sam.</p></div></div>
+  <div class="pipe">
+   <div class="ps"><small>Nowe</small><b>2</b><span>czekają na wpłatę</span></div>
+   <div class="ps"><small>Opłacone</small><b>3</b><span>faktura wystawiona samo</span></div>
+   <div class="ps hot"><small>Do spakowania</small><b>5</b><span>etykiety gotowe</span></div>
+   <div class="ps"><small>W drodze</small><b>9</b><span>klient dostał numer</span></div>
+   <div class="ps"><small>Doręczone</small><b>37</b><span>w tym tygodniu</span></div>
+  </div>
+ </div>
+ <div class="g2">
+  <div class="card">
+   <div class="ch"><div><h2>Sprzedaż · 14 dni</h2><p>Sklep i Allegro razem, w złotych brutto.</p></div></div>
+   <div class="chart" id="chart"></div>
+   <div class="legend"><span><i style="background:var(--ink)"></i>Sklep</span><span><i style="background:var(--acc)"></i>Allegro</span></div>
+  </div>
+  <div class="card">
+   <div class="ch"><div><h2>Automaty dziś</h2><p>Co panel zrobił za Ciebie.</p></div><button class="btn sm" data-go="automaty">Ustawienia</button></div>
+   <div class="feed" id="feed"></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="ch"><div><h2>Ostatnie zamówienia</h2><p>Ze sklepu i z Allegro w jednym miejscu. Kliknij, żeby zobaczyć szczegóły.</p></div><button class="btn sm" data-go="zamowienia">Wszystkie</button></div>
+  <div class="tw" style="margin-top:12px"><table id="t-last"></table></div>
+ </div>
+</div></section>
+
+<!-- ===== ZAMÓWIENIA ===== -->
+<section class="view" id="v-zamowienia" hidden><div class="wrap">
+ <div class="head"><div><h1>Zamówienia</h1><p>Sklep i Allegro na jednej liście. Faktura i etykieta tworzą się same, Ty tylko pakujesz.</p></div></div>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+  <div class="chips" id="f-ord"><button class="chip on" data-f="all">Wszystkie</button><button class="chip" data-f="send">Do wysłania</button><button class="chip" data-f="shop">Sklep</button><button class="chip" data-f="alle">Allegro</button></div>
+  <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" placeholder="Szukaj: klient, numer, część"></label>
+ </div>
+ <div class="card"><div class="tw"><table id="t-ord"></table></div></div>
+</div></section>
+
+<!-- ===== WYSYŁKI ===== -->
+<section class="view" id="v-wysylki" hidden><div class="wrap">
+ <div class="head"><div><h1>Wysyłki</h1><p>Etykiety DPD i InPost tworzą się same po opłaceniu. Klient od razu dostaje mail z numerem przesyłki, a potem informacje, gdzie jest paczka.</p></div><button class="btn acc" id="b-print">Drukuj etykiety (<span id="n-lab">5</span>)</button></div>
+ <div class="card"><div class="tw"><table id="t-ship"></table></div></div>
+ <div class="g2e">
+  <div class="card"><div class="ch"><div><h2>Mail do klienta</h2><p>Wysyła się sam po nadaniu paczki.</p></div></div>
+   <div style="padding:14px 20px 20px"><div class="box" style="background:var(--soft)"><b>Twoje zamówienie #24871 jest w drodze</b><p class="sub" style="margin:8px 0 0">Dzień dobry Panie Marku, paczka z częściami do Porsche 911 (996) została nadana kurierem DPD. Numer przesyłki: 1360 4419 8820 3. Kurier dostarczy ją jutro do 18:00.</p></div></div></div>
+  <div class="card"><div class="ch"><div><h2>Gabaryty</h2><p>Duże części (zderzaki, felgi) panel rozpoznaje sam i zamawia odpowiedni transport.</p></div></div>
+   <div class="rules"><div class="rule"><div><b>Zderzak przedni 997 GT3</b><span>wymiary ponad limit kuriera</span></div><span class="pill p-vio">paleta</span></div><div class="rule"><div><b>Felgi 19" Carrera S, komplet</b><span>4 paczki, jedna etykieta zbiorcza</span></div><span class="pill p-info">4 × DPD</span></div></div></div>
+ </div>
+</div></section>
+
+<!-- ===== FAKTURY ===== -->
+<section class="view" id="v-faktury" hidden><div class="wrap">
+ <div class="head"><div><h1>Faktury</h1><p>Faktura wystawia się sama, gdy zamówienie jest opłacone, trafia do KSeF i do klienta mailem. Działa z programem, którego już używacie.</p></div></div>
+ <div class="kpis">
+  <div class="k"><small>Wystawione dziś</small><b>11</b><span>wszystkie samo</span></div>
+  <div class="k"><small>W KSeF</small><b>11 / 11</b><span>przyjęte bez błędów</span></div>
+  <div class="k"><small>Paragony</small><b>3</b><span>dla klientów bez NIP</span></div>
+  <div class="k"><small>Do poprawy</small><b>0</b><span>nic nie czeka</span></div>
+ </div>
+ <div class="card"><div class="tw"><table id="t-inv"></table></div></div>
+</div></section>
+
+<!-- ===== KLIENCI ===== -->
+<section class="view" id="v-klienci" hidden><div class="wrap">
+ <div class="head"><div><h1>Klienci</h1><p>Każdy klient z historią zamówień i swoim Porsche. Przy następnym zamówieniu od razu widać, do jakiego auta szuka części.</p></div></div>
+ <div class="card"><div class="tw"><table id="t-cli"></table></div></div>
+ <div class="card"><div class="ch"><div><h2>Pomysł na sprzedaż</h2><p>Panel sam podpowiada, komu zaproponować części.</p></div></div>
+  <div class="rules">
+   <div class="rule"><div><b>23 klientów z 911 (996) kupiło klocki ponad rok temu</b><span>mail z ofertą tarcz i klocków do ich auta</span></div><button class="btn sm" id="b-camp">Przygotuj mail</button></div>
+   <div class="rule"><div><b>8 klientów z 944 / 968 ogląda części silnika</b><span>przypomnienie o wymianie paska rozrządu</span></div><span class="pill p-mut">pomysł</span></div>
+  </div></div>
+</div></section>
+
+<!-- ===== CENY ===== -->
+<section class="view" id="v-ceny" hidden><div class="wrap">
+ <div class="head"><div><h1>Ceny i stany</h1><p>Co noc panel pobiera katalog dostawcy, przelicza ceny według Twoich reguł i wgrywa je do sklepu i na Allegro. Duże zmiany czekają na Twoją decyzję.</p></div></div>
+ <div class="kpis">
+  <div class="k"><small>Części połączone</small><b>14 380</b><span>sklep ↔ katalog dostawcy</span></div>
+  <div class="k"><small>Zmiany cen dziś</small><b>212</b><span>206 wgranych samo</span></div>
+  <div class="k"><small>Zmiany stanów</small><b>538</b><span>41 wyprzedanych u dostawcy</span></div>
+  <div class="k"><small>Nowe w katalogu</small><b>3</b><span>gotowe do dodania</span></div>
+ </div>
+ <div class="card">
+  <div class="ch"><div><h2>Do akceptacji</h2><p>Cena dostawcy zmieniła się o więcej niż 15%. Zaznacz, które wgrać.</p></div></div>
+  <div class="tw" style="margin-top:12px"><table id="t-ch"></table></div>
+  <div class="bar"><span class="sub" id="selinfo">Zaznaczone: 0</span><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" id="b-skip">Pomiń</button><button class="btn sm pri" id="b-ok">Wgraj do sklepu i na Allegro</button></div></div>
+ </div>
+ <div class="g2e">
+  <div class="card"><div class="ch"><div><h2>Reguły cen</h2><p>Ustawiasz raz, panel liczy każdą cenę tak samo.</p></div></div>
+   <div class="rules">
+    <div class="rule"><div><b>Kurs EUR</b><span>codziennie z NBP + bufor</span></div><span class="val">NBP + 2%</span></div>
+    <div class="rule"><div><b>Marża domyślna</b><span>wszystkie kategorie bez własnej reguły</span></div><span class="val">25%</span></div>
+    <div class="rule"><div><b>Silnik, układ paliwowy</b><span>droższe części, mniejsza marża</span></div><span class="val">18%</span></div>
+    <div class="rule"><div><b>Karoseria, wnętrze klasyków</b><span>części rzadkie</span></div><span class="val">35%</span></div>
+    <div class="rule"><div><b>Minimalny zysk na sztuce</b><span>drobnica nie schodzi niżej</span></div><span class="val">25 zł</span></div>
+    <div class="rule"><div><b>Allegro</b><span>doliczana prowizja</span></div><span class="val">+11%</span></div>
+   </div></div>
+  <div class="card"><div class="ch"><div><h2>Sprawdź cenę</h2><p>Wpisz cenę dostawcy i zobacz, ile wyjdzie w sklepie.</p></div></div>
+   <form class="calc" id="calc">
+    <div class="row"><div><label for="c-eur">Cena dostawcy (EUR netto)</label><input id="c-eur" type="number" step="0.01" value="186.40"></div>
+    <div><label for="c-cat">Kategoria</label><select id="c-cat"><option value="25">Domyślna (25%)</option><option value="18">Silnik (18%)</option><option value="35">Karoseria (35%)</option></select></div></div>
+    <div class="res" id="c-res"></div>
+   </form></div>
+ </div>
+</div></section>
+
+<!-- ===== AUTOMATY ===== -->
+<section class="view" id="v-automaty" hidden><div class="wrap">
+ <div class="head"><div><h1>Automaty</h1><p>Wszystko, co dzieje się samo. Każdy automat włączasz i wyłączasz jednym kliknięciem.</p></div></div>
+ <div class="card"><div class="autos" id="autos"></div></div>
+</div></section>
+
+</div></main>
+</div>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Szczegóły zamówienia"></aside>
+<div class="toast" id="toast" hidden><i>✓</i><span id="toast-t"></span></div>
+
+<script>
+(function(){
+ function $(id){return document.getElementById(id);}
+ function zl(v){return v.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/ /g,' ')+' zł';}
+ function zl0(v){return Math.round(v).toLocaleString('pl-PL').replace(/ /g,' ')+' zł';}
+ var SVG={inv:'<path d="M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h4"/>',box:'<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',tag:'<path d="M3 12l9-9h8v8l-9 9z"/><circle cx="16" cy="8" r="1.5"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',alert:'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/>',cart:'<path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8a3 3 0 016 0"/>',sms:'<path d="M4 5h16v11H8l-4 4z"/>',sync:'<path d="M20 12a8 8 0 01-14 5M4 12a8 8 0 0114-5"/><path d="M18 3v4h-4M6 21v-4h4"/>'};
+ function ic(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+SVG[k]+'</svg>';}
+ var ST={nowe:['Czeka na wpłatę','p-mut'],opl:['Opłacone','p-info'],pak:['Do spakowania','p-warn'],wys:['W drodze','p-vio'],dor:['Doręczone','p-ok']};
+ var ORD=[
+  {id:24871,src:'s',t:'08:12',cl:'Marek Wiśniewski',city:'Kraków',car:'911 (996) Carrera 4',it:[['Tarcze hamulcowe przód, komplet','996.351.405.01',1489],['Klocki hamulcowe przód','996.351.939.03',612]],pay:'BLIK',st:'pak',ship:'DPD',fv:'FV/11/2026/118'},
+  {id:24870,src:'a',t:'07:58',cl:'Auto Klasyk Demo sp. z o.o.',city:'Poznań',car:'911 (964) Carrera 2',it:[['Pompa oleju','964.107.012.03',4650]],pay:'Allegro Pay',st:'pak',ship:'DPD',fv:'FV/11/2026/117'},
+  {id:24869,src:'s',t:'07:31',cl:'Tomasz Kamiński',city:'Wrocław',car:'Boxster (986) 2.7',it:[['Termostat z obudową','996.107.083.55',612.99],['Uszczelka obudowy','996.106.135.53',89]],pay:'Przelewy24',st:'pak',ship:'InPost',fv:'FV/11/2026/116'},
+  {id:24868,src:'a',t:'wczoraj',cl:'Paweł Nowicki',city:'Gdańsk',car:'944 S2',it:[['Tarcza hamulcowa przód','944.352.951.00',529],['Czujnik zużycia klocków','944.612.365.01',119]],pay:'Allegro Pay',st:'pak',ship:'DPD',fv:'PAR/11/2026/031'},
+  {id:24867,src:'s',t:'wczoraj',cl:'Garage Demo 911',city:'Warszawa',car:'911 (997) GT3',it:[['Zderzak przedni GT3','997.505.311.92',6890]],pay:'Przelew',st:'pak',ship:'Paleta',fv:'FV/11/2026/115'},
+  {id:24866,src:'s',t:'wczoraj',cl:'Kamil Zieliński',city:'Łódź',car:'Cayenne (955) S',it:[['Filtr powietrza','955.110.131.01',219],['Świece zapłonowe, komplet','999.170.239.90',488]],pay:'Karta',st:'opl',ship:'DPD',fv:'FV/11/2026/114'},
+  {id:24865,src:'a',t:'wczoraj',cl:'Robert Lewandowski',city:'Katowice',car:'928 S4',it:[['Uszczelka pokrywy zaworów','928.110.153.10',129]],pay:'Allegro Pay',st:'wys',ship:'InPost',fv:'PAR/11/2026/030'},
+  {id:24864,src:'s',t:'pon.',cl:'Adam Wójcik',city:'Szczecin',car:'911 (993) Carrera',it:[['Lampa kierunkowskazu lewa','993.631.401.00',739.99]],pay:'BLIK',st:'wys',ship:'DPD',fv:'FV/11/2026/112'},
+  {id:24863,src:'s',t:'pon.',cl:'Michał Dąbrowski',city:'Lublin',car:'356 C',it:[['Uszczelka szyby przedniej','644.541.921.00',549]],pay:'Przelew',st:'nowe',ship:'DPD',fv:''},
+  {id:24862,src:'a',t:'pon.',cl:'Krzysztof Mazur',city:'Rzeszów',car:'Macan (95B) S',it:[['Wycieraczki, komplet','95B.955.425.00',259]],pay:'Allegro Pay',st:'dor',ship:'InPost',fv:'PAR/11/2026/028'}
+ ];
+ function tot(o){var s=0;o.it.forEach(function(i){s+=i[2];});return s;}
+ function srcB(o){return '<span class="src '+o.src+'">'+(o.src==='s'?'SKLEP':'ALLEGRO')+'</span>';}
+ function stB(o){var s=ST[o.st];return '<span class="pill '+s[1]+'">'+s[0]+'</span>';}
+ function row(o,small){return '<tr class="click" data-o="'+o.id+'"><td><b>#'+o.id+'</b><div class="sub">'+o.t+'</div></td><td>'+srcB(o)+'</td><td><b>'+o.cl+'</b><div class="sub">'+o.it[0][0]+(o.it.length>1?' + '+(o.it.length-1):'')+'</div></td>'+(small?'':'<td class="hide-m"><span class="car">'+o.car+'</span></td>')+'<td class="n"><b>'+zl(tot(o))+'</b></td><td>'+stB(o)+'</td></tr>';}
+ function head(small){return '<thead><tr><th>Nr</th><th>Kanał</th><th>Klient</th>'+(small?'':'<th class="hide-m">Auto</th>')+'<th class="n">Kwota</th><th>Status</th></tr></thead>';}
+ function renderLast(){$('t-last').innerHTML=head(true)+'<tbody>'+ORD.slice(0,5).map(function(o){return row(o,true);}).join('')+'</tbody>';}
+ var FO='all',Q='';
+ function renderOrd(){var L=ORD.filter(function(o){if(FO==='send'&&o.st!=='pak')return false;if(FO==='shop'&&o.src!=='s')return false;if(FO==='alle'&&o.src!=='a')return false;
+   if(Q){var s=(o.id+' '+o.cl+' '+o.car+' '+o.it.map(function(i){return i[0]+' '+i[1];}).join(' ')).toLowerCase();if(s.indexOf(Q)<0)return false;}return true;});
+  $('t-ord').innerHTML=head(false)+'<tbody>'+(L.length?L.map(function(o){return row(o,false);}).join(''):'<tr><td colspan="6" class="sub" style="padding:24px 20px">Nic nie pasuje do wyszukiwania.</td></tr>')+'</tbody>';}
+ function renderShip(){var L=ORD.filter(function(o){return o.st==='pak'||o.st==='wys';});
+  $('t-ship').innerHTML='<thead><tr><th>Zamówienie</th><th>Klient</th><th>Kurier</th><th>Numer przesyłki</th><th>Status</th><th></th></tr></thead><tbody>'+L.map(function(o){var nr=o.ship==='Paleta'?'zlecenie palety':(o.ship==='DPD'?'1360 4419 88'+String(o.id).slice(-2)+' 3':'6200 1847 55'+String(o.id).slice(-2));
+   return '<tr><td><b>#'+o.id+'</b></td><td>'+o.cl+'<div class="sub">'+o.city+'</div></td><td><b>'+o.ship+'</b></td><td class="mono">'+nr+'</td><td>'+(o.st==='pak'?'<span class="pill p-warn">etykieta gotowa</span>':'<span class="pill p-vio">w drodze</span>')+'</td><td class="n">'+(o.st==='pak'?'<button class="btn sm send" data-o="'+o.id+'">Paczka spakowana</button>':'<span class="sub">doręczenie jutro</span>')+'</td></tr>';}).join('')+'</tbody>';
+  var n=ORD.filter(function(o){return o.st==='pak';}).length;$('n-lab').textContent=n;$('k-send').textContent=n;var e=$('c-ord');e.textContent=n;e.hidden=!n;}
+ function renderInv(){var L=ORD.filter(function(o){return o.fv;});
+  $('t-inv').innerHTML='<thead><tr><th>Dokument</th><th>Klient</th><th>Zamówienie</th><th class="n">Kwota</th><th>KSeF</th><th>Do klienta</th></tr></thead><tbody>'+L.map(function(o){var par=o.fv.indexOf('PAR')===0;
+   return '<tr><td><b>'+o.fv+'</b><div class="sub">'+(par?'paragon':'faktura VAT')+' · wystawiona samo</div></td><td>'+o.cl+'</td><td>#'+o.id+' '+srcB(o)+'</td><td class="n">'+zl(tot(o))+'</td><td>'+(par?'<span class="sub">nie dotyczy</span>':'<span class="pill p-ok">przyjęta</span>')+'</td><td><span class="pill p-ok">wysłana mailem</span></td></tr>';}).join('')+'</tbody>';}
+ var CLI=[['Marek Wiśniewski','Kraków','911 (996) Carrera 4',7,9840,'dziś'],['Auto Klasyk Demo sp. z o.o.','Poznań','911 (964), 911 (993)',23,61200,'dziś'],['Tomasz Kamiński','Wrocław','Boxster (986)',3,1980,'dziś'],['Garage Demo 911','Warszawa','911 (997) GT3',11,38450,'wczoraj'],['Paweł Nowicki','Gdańsk','944 S2',5,2310,'wczoraj'],['Michał Dąbrowski','Lublin','356 C',2,1460,'pon.']];
+ function renderCli(){$('t-cli').innerHTML='<thead><tr><th>Klient</th><th>Auto</th><th class="n">Zamówień</th><th class="n">Wydał łącznie</th><th>Ostatnio</th></tr></thead><tbody>'+CLI.map(function(c){return '<tr><td><b>'+c[0]+'</b><div class="sub">'+c[1]+'</div></td><td><span class="car">'+c[2]+'</span></td><td class="n">'+c[3]+'</td><td class="n"><b>'+zl0(c[4])+'</b></td><td>'+c[5]+'</td></tr>';}).join('')+'</tbody>';}
+ var FEED=[['inv','var(--infos)','var(--info)','11 faktur wystawionych i wysłanych do KSeF','po opłaceniu zamówień','11:20'],['box','var(--accs)','var(--ink)','6 etykiet DPD i InPost przygotowanych','paczki czekają na spakowanie','10:05'],['mail','var(--oks)','var(--ok)','9 maili z numerem przesyłki','klienci wiedzą, gdzie jest paczka','09:40'],['tag','var(--vios)','var(--vio)','212 cen zaktualizowanych w sklepie i na Allegro','6 dużych zmian czeka na Ciebie','04:00'],['alert','var(--bads)','var(--bad)','41 części wyprzedanych u dostawcy','ustawione „na zamówienie, 7–10 dni”','04:02'],['star','var(--warns)','var(--warn)','4 prośby o opinię','do klientów 3 dni po doręczeniu','08:00']];
+ function renderFeed(){$('feed').innerHTML=FEED.map(function(f){return '<div class="fe"><i style="background:'+f[1]+';color:'+f[2]+'">'+ic(f[0])+'</i><div><b>'+f[3]+'</b><span>'+f[4]+'</span></div><time>'+f[5]+'</time></div>';}).join('');}
+ function renderChart(){var S=[3200,4100,2800,5200,4700,1900,1300,3900,4400,5100,3600,4800,2100,5400],A=[1400,1900,1200,2300,1800,900,1100,1700,2100,2400,1500,2000,1200,3037];
+  var W=640,H=230,pl=44,pb=26,pt=10,mx=9000,bw=(W-pl-10)/14;var g='';
+  [0,3000,6000,9000].forEach(function(v){var y=pt+(H-pt-pb)*(1-v/mx);g+='<line x1="'+pl+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="#E6E5E1"/><text x="'+(pl-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#7C7A74">'+(v/1000)+' tys.</text>';});
+  var D=['23','24','25','26','27','28','29','30','31','1','2','3','4','5'];
+  for(var i=0;i<14;i++){var x=pl+6+i*bw,h1=(H-pt-pb)*S[i]/mx,h2=(H-pt-pb)*A[i]/mx,y0=H-pb;
+   g+='<rect x="'+x+'" y="'+(y0-h1)+'" width="'+(bw-10)+'" height="'+h1+'" rx="3" fill="#141414"'+(i===13?'':' fill-opacity=".88"')+'/><rect x="'+x+'" y="'+(y0-h1-h2)+'" width="'+(bw-10)+'" height="'+h2+'" rx="3" fill="#F9C231"/>';
+   if(i%2===1||i===13)g+='<text x="'+(x+(bw-10)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="'+(i===13?'#141414':'#7C7A74')+'"'+(i===13?' font-weight="700"':'')+'>'+D[i]+(i<9?'.10':'.11')+'</text>';}
+  var lx=pl+6+13*bw+(bw-10)/2,ly=H-pb-(H-pt-pb)*(S[13]+A[13])/mx;
+  g+='<text x="'+lx+'" y="'+(ly-8)+'" text-anchor="end" font-size="12" font-weight="700" fill="#141414">8 437 zł</text>';
+  $('chart').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Sprzedaż z 14 dni, dziś 8 437 zł">'+g+'</svg>';}
+ // szuflada
+ function openOrd(id){var o=ORD.filter(function(x){return x.id===id;})[0];if(!o)return;
+  var steps=[['Zamówienie przyszło ('+(o.src==='s'?'sklep':'Allegro')+')',o.t,1],['Wpłata zaksięgowana · '+o.pay,o.st==='nowe'?'':o.t,o.st!=='nowe'],['Faktura '+(o.fv||'')+' wystawiona i wysłana',o.fv?o.t:'',!!o.fv],['Etykieta '+o.ship+' gotowa',o.st==='pak'||o.st==='wys'||o.st==='dor'?o.t:'',o.st==='pak'||o.st==='wys'||o.st==='dor'],['Paczka nadana, klient dostał numer','',o.st==='wys'||o.st==='dor'],['Doręczona · prośba o opinię za 3 dni','',o.st==='dor']];
+  var nxt=false;var tl=steps.map(function(s){var c=s[2]?'done':(nxt?'':'next');if(!s[2])nxt=true;return '<div class="'+c+'"><i></i><span>'+s[0]+'</span><time>'+(s[1]||'')+'</time></div>';}).join('');
+  var act=o.st==='pak'?'<button class="btn acc send" data-o="'+o.id+'">Paczka spakowana · przekaż kurierowi</button><button class="btn" data-toast="Etykieta '+o.ship+' wysłana do drukarki">Drukuj etykietę</button>':(o.st==='nowe'?'<button class="btn pri" data-toast="Przypomnienie o płatności wysłane do klienta">Przypomnij o płatności</button><button class="btn" data-toast="Proforma wysłana mailem">Wyślij proformę</button>':'<button class="btn" data-toast="Faktura pobrana">Pobierz fakturę</button><button class="btn" data-toast="Link do śledzenia skopiowany">Link do śledzenia</button>');
+  $('drawer').innerHTML='<div class="dh"><div><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">'+srcB(o)+stB(o)+'</div><h3>Zamówienie #'+o.id+'</h3><div class="sub" style="margin-top:6px">'+o.t+' · '+o.pay+'</div></div><button class="x" id="dx" aria-label="Zamknij">✕</button></div>'+
+   '<div class="db"><div class="dact">'+act+'</div>'+
+   '<div class="box"><h4>Części</h4><div class="items">'+o.it.map(function(i){return '<div><span><b>'+i[0]+'</b><br><span class="mono">'+i[1]+'</span></span><b class="n">'+zl(i[2])+'</b></div>';}).join('')+'<div><span>Razem z dostawą</span><b class="n">'+zl(tot(o)+(tot(o)>=911?0:22))+'</b></div></div></div>'+
+   '<div class="box"><h4>Klient</h4><div class="kv"><span>Imię i nazwisko</span><b>'+o.cl+'</b></div><div class="kv"><span>Miasto</span><b>'+o.city+'</b></div><div class="kv"><span>Auto</span><span class="car" style="color:var(--ink)">'+o.car+'</span></div><div class="kv"><span>Wysyłka</span><b>'+o.ship+'</b></div></div>'+
+   (o.st==='pak'?'<div class="label"><div class="bars"></div><div><b>Etykieta '+o.ship+' gotowa</b><div class="sub">Utworzona sama po opłaceniu. Wystarczy wydrukować i nakleić.</div></div></div>':'')+
+   '<div class="box"><h4>Co się dzieje samo</h4><div class="tl">'+tl+'</div></div></div>';
+  $('ov').classList.add('on');$('drawer').classList.add('on');document.body.style.overflow='hidden';$('dx').focus();}
+ function closeD(){$('ov').classList.remove('on');$('drawer').classList.remove('on');document.body.style.overflow='';}
+ $('ov').addEventListener('click',closeD);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeD();});
+ // ceny
+ var CH=[{nr:'996.106.102.52',n:'Zawór wydechowy',m:'911 (996) 3.4',o:289,n2:349},{nr:'964.107.012.03',n:'Pompa oleju',m:'911 (964) 3.6',o:3890,n2:4650},{nr:'944.352.951.00',n:'Tarcza hamulcowa przód',m:'944 S2 / 968',o:612,n2:529},{nr:'911.611.101.00',n:'Wycieraczka szyby przedniej',m:'911 klasyk',o:189,n2:229},{nr:'997.624.111.07',n:'Czujnik ABS tył',m:'911 (997)',o:418,n2:489},{nr:'928.110.153.10',n:'Uszczelka pokrywy zaworów',m:'928 S4',o:156,n2:129}];
+ function diff(r){var d=(r.n2-r.o)/r.o*100;return '<span class="'+(d>0?'up':'dn')+'">'+(d>0?'+':'')+d.toFixed(1).replace('.',',')+'%</span>';}
+ function renderCh(){$('t-ch').innerHTML='<thead><tr><th><input type="checkbox" class="chk" id="all" aria-label="Zaznacz wszystkie"></th><th>Część</th><th class="hide-m">Pasuje do</th><th class="n">Teraz</th><th class="n">Nowa cena</th><th class="n">Zmiana</th><th>Status</th></tr></thead><tbody>'+CH.map(function(r,i){
+   return '<tr><td><input type="checkbox" class="chk rowc" data-i="'+i+'" aria-label="Zaznacz '+r.n+'"'+(r.done?' disabled':'')+'></td><td><b>'+r.n+'</b><div class="mono">'+r.nr+'</div></td><td class="hide-m">'+r.m+'</td><td class="n">'+zl(r.o)+'</td><td class="n"><b>'+zl(r.n2)+'</b></td><td class="n">'+diff(r)+'</td><td>'+(r.done==='ok'?'<span class="pill p-ok">wgrane</span>':r.done==='skip'?'<span class="pill p-mut">pominięte</span>':'<span class="pill p-warn">czeka</span>')+'</td></tr>';}).join('')+'</tbody>';
+  $('all').addEventListener('change',function(){var a=this.checked;[].forEach.call(document.querySelectorAll('.rowc:not(:disabled)'),function(c){c.checked=a;});sel();});
+  [].forEach.call(document.querySelectorAll('.rowc'),function(c){c.addEventListener('change',sel);});sel();
+  var n=CH.filter(function(r){return !r.done;}).length,e=$('c-pr');e.textContent=n;e.hidden=!n;}
+ function sel(){$('selinfo').textContent='Zaznaczone: '+document.querySelectorAll('.rowc:checked').length;}
+ function act(k){var ids=[].map.call(document.querySelectorAll('.rowc:checked'),function(c){return +c.getAttribute('data-i');});if(!ids.length){toast('Najpierw zaznacz części na liście');return;}
+  ids.forEach(function(i){CH[i].done=k;});renderCh();toast(k==='ok'?'Nowe ceny wgrane do IdoSell i na Allegro: '+ids.length:'Pominięte: '+ids.length);}
+ $('b-ok').addEventListener('click',function(){act('ok');});$('b-skip').addEventListener('click',function(){act('skip');});
+ function calc(){var e=parseFloat($('c-eur').value)||0,m=+$('c-cat').value,k=4.31*1.02,net=e*k,z=Math.max(net*m/100,25),br=(net+z)*1.23,fin=Math.ceil(br/10)*10-0.01;
+  $('c-res').innerHTML='<div><span class="sub">Koszt w PLN (kurs '+k.toFixed(4).replace('.',',')+')</span><span>'+zl(net)+'</span></div><div><span class="sub">Marża '+m+'%</span><span>'+zl(z)+'</span></div><div><span class="sub">Z VAT 23%</span><span>'+zl(br)+'</span></div><div style="align-items:baseline"><span><b>Cena w sklepie</b></span><span class="tot">'+zl(fin)+'</span></div><div><span class="sub">Na Allegro</span><span>'+zl(Math.ceil(fin*1.11/10)*10-0.01)+'</span></div>';}
+ $('calc').addEventListener('input',calc);$('calc').addEventListener('submit',function(e){e.preventDefault();});
+ // automaty
+ var AU=[['inv','Faktura po opłaceniu','Faktura lub paragon wystawia się sam, trafia do KSeF i do klienta mailem.',1],['box','Etykieta po opłaceniu','DPD albo InPost, gabaryty na paletę. Gotowa do druku, zanim weźmiesz część z półki.',1],['mail','Mail z numerem przesyłki','Klient dostaje numer i link do śledzenia, potem informację o doręczeniu.',1],['sms','SMS w dniu doręczenia','Krótka wiadomość, że kurier jest w drodze.',0],['tag','Ceny i stany co noc','Katalog dostawcy → Twoje reguły cen → sklep i Allegro.',1],['alert','Wyprzedane u dostawcy','Część zmienia się na „na zamówienie, 7–10 dni”, zamiast znikać ze sklepu.',1],['cart','Allegro w jednym miejscu','Zamówienia i wiadomości z Allegro wpadają do tego panelu.',1],['star','Prośba o opinię','3 dni po doręczeniu, tylko gdy nie było reklamacji.',1],['sync','Raport na maila rano','Sprzedaż z wczoraj, co czeka i co zrobiły automaty.',0]];
+ function renderAu(){$('autos').innerHTML=AU.map(function(a,i){return '<div class="au"><i>'+ic(a[0])+'</i><div><b>'+a[1]+'</b><span>'+a[2]+'</span></div><label class="sw"><input type="checkbox" data-a="'+i+'"'+(a[3]?' checked':'')+' aria-label="'+a[1]+'"><u></u></label></div>';}).join('');}
+ document.addEventListener('change',function(e){var a=e.target.getAttribute&&e.target.getAttribute('data-a');if(a===null||a===undefined)return;AU[+a][3]=e.target.checked?1:0;toast(AU[+a][1]+(e.target.checked?': włączone':': wyłączone'));});
+ // akcje
+ document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-v],[data-go]');if(t){var v=t.getAttribute('data-v')||t.getAttribute('data-go');if(location.hash!=='#'+v)location.hash=v;else show(v);return;}
+  var s=e.target.closest('.send');if(s){var id=+s.getAttribute('data-o');ORD.forEach(function(o){if(o.id===id)o.st='wys';});renderAll();closeD();toast('Paczka #'+id+' przekazana kurierowi, klient dostał mail z numerem');return;}
+  var r=e.target.closest('tr.click');if(r){openOrd(+r.getAttribute('data-o'));return;}
+  var c=e.target.closest('#f-ord .chip');if(c){[].forEach.call(document.querySelectorAll('#f-ord .chip'),function(x){x.classList.remove('on');});c.classList.add('on');FO=c.getAttribute('data-f');renderOrd();return;}
+  var ts=e.target.closest('[data-toast]');if(ts){toast(ts.getAttribute('data-toast'));return;}
+  if(e.target.closest('#dx')){closeD();return;}
+  if(e.target.closest('#b-print')){toast('Etykiety wysłane do drukarki: '+$('n-lab').textContent);return;}
+  if(e.target.closest('#b-camp')){toast('Mail do 23 klientów przygotowany. Czeka na Twoją akceptację');return;}
+ });
+ $('q').addEventListener('input',function(){Q=this.value.trim().toLowerCase();renderOrd();});
+ var tt;function toast(m){$('toast-t').textContent=m;$('toast').hidden=false;clearTimeout(tt);tt=setTimeout(function(){$('toast').hidden=true;},2800);}
+ var V=['pulpit','zamowienia','wysylki','faktury','klienci','ceny','automaty'];
+ function show(v){if(V.indexOf(v)<0)v='pulpit';V.forEach(function(x){$('v-'+x).hidden=x!==v;});[].forEach.call(document.querySelectorAll('#nav button'),function(b){b.classList.toggle('on',b.getAttribute('data-v')===v);if(b.classList.contains('on')&&b.scrollIntoView&&innerWidth<780)b.scrollIntoView({inline:'center',block:'nearest'});});window.scrollTo(0,0);}
+ addEventListener('hashchange',function(){show(location.hash.slice(1));});
+ function renderAll(){renderLast();renderOrd();renderShip();renderInv();}
+ renderAll();renderCli();renderFeed();renderChart();renderCh();calc();renderAu();show(location.hash.slice(1));
+})();
+</script>
+</body>
+</html>
