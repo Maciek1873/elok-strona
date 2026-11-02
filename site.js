@@ -308,3 +308,5 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  document.body.appendChild(bar);
  [].forEach.call(bar.querySelectorAll('button'),function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-z');set(v);bar.remove();if(v==='tak')load();});});
 })();
+/* pasek wersji testowej (tylko na test.elok-agency.pl) */
+(function(){if(!/^test\./.test(location.hostname))return;var s=document.createElement('style');s.textContent='#testbar{position:fixed;left:0;right:0;top:0;z-index:100;background:#B08A3E;color:#fff;font:600 13px/1.3 Figtree,Arial,sans-serif;text-align:center;padding:7px 12px}body{padding-top:32px}.nav{top:32px!important}';document.head.appendChild(s);var b=document.createElement('div');b.id='testbar';b.textContent='WERSJA TESTOWA – tak będzie wyglądać strona po zatwierdzeniu w panelu (Aktualizacje)';document.body.appendChild(b);})();
