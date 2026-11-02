@@ -1227,3 +1227,11 @@ footer.pf{background:var(--bg2);border-top:0}
  .pf .legal{align-items:center!important}
 }
 @media(max-width:700px){.pf .cols>div:nth-child(4){flex-direction:row!important;flex-wrap:wrap;justify-content:center;column-gap:4px}.pf .cols>div:nth-child(4) h4,.pf .cols>div:nth-child(4) .m{flex-basis:100%}}
+/* duży napis ELOK w tle stopki – tylko na komputerze */
+@media(min-width:701px){
+ .pf .fstage{position:relative}
+ .pf .fstage .mark{display:block!important;font-size:clamp(160px,24vw,420px);top:50%;transform:translateY(-50%)}
+ .pf .fstage .cols{position:relative;z-index:1}
+ .light .pf .fstage .mark{background:linear-gradient(180deg,rgba(11,11,12,.06),rgba(11,11,12,.015) 90%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent}
+ .light .pf .fstage .mark span{display:inline!important;background:linear-gradient(180deg,rgba(168,135,90,.45),rgba(168,135,90,.08))!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent}
+}
