@@ -353,3 +353,18 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  mm.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');bg.setAttribute('aria-expanded','false');set(false);}});
  addEventListener('resize',function(){if(innerWidth>700&&mm.classList.contains('on')){nav.classList.remove('open');set(false);}});
 })();
+/* ===== v11: karuzele bez animacji wjazdu + stopka jak w TO ===== */
+(function(){
+ [].forEach.call(document.querySelectorAll('.swipe>*'),function(c){c.classList.remove('pre');});
+ [].forEach.call(document.querySelectorAll('.swipe .tilt'),function(c){c.classList.remove('tilt');});
+ var st=document.querySelector('.pf .fstage');if(!st||document.querySelector('.fbrand'))return;
+ var soc=document.querySelector('.pf .social');
+ var fb=document.createElement('div');fb.className='fbrand';
+ fb.innerHTML='<a class="lg" href="index.html">ELOK<span>.</span></a><p>Automatyzacje, strony i marketing dla firm. Konsultacje online w całej Polsce.</p>'+(soc?'<div class="social">'+soc.innerHTML+'</div>':'');
+ st.parentNode.insertBefore(fb,st);
+ var k=document.querySelectorAll('.pf .cols>div')[2];
+ if(k){var a=k.querySelectorAll('a[href^="tel:"],a[href^="mailto:"]');
+  [].forEach.call(a,function(x){var l=document.createElement('span');l.className='lbl';l.textContent=x.href.indexOf('tel:')===0?'Telefon':'E-mail';x.parentNode.insertBefore(l,x);});
+  var m=k.querySelector('.m');if(m){var l2=document.createElement('span');l2.className='lbl';l2.textContent='Godziny';var hrs=document.createElement('span');hrs.className='hrs';hrs.textContent='pon.–pt. 9:00–17:00';m.parentNode.insertBefore(l2,m);m.parentNode.insertBefore(hrs,m);}}
+ var lg=document.querySelector('.pf .legal span');if(lg&&lg.textContent.indexOf('NIP')<0)lg.innerHTML+=' · NIP 1231588867';
+})();

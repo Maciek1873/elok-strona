@@ -122,3 +122,55 @@ body.light::after{opacity:0}
  .exs>div b{font-size:16.5px}.exs>div span{font-size:14.5px}
  .exs>div em{justify-self:start;font-size:15px;padding:4px 10px;border-radius:999px;background:var(--bg2)}
 }
+/* ===== v11: poprawki telefonu + stopka premium ===== */
+.swipe{touch-action:pan-x pan-y}
+.swipe>*,.swipe .rv{transform:none!important;opacity:1!important}
+.ct .vb{color:#fff;background:rgba(8,8,10,.78);border-color:rgba(255,255,255,.25)}
+.ct .vb i{color:#120E06}
+/* pierwsza usługa: jasna karta z wyróżnieniem zamiast czarnej */
+.light .pcard.main,.light .pc.hot{background:linear-gradient(180deg,#FBF7EF 0%,#FFFFFF 55%);border:1.5px solid var(--gold);color:var(--fg);--fg:#0B0B0C;--mut:#56534D;--line:#ECEAE5;--card:#FFFFFF}
+.light .pcard.main .n{display:inline-flex;align-self:flex-start;background:#0B0B0C;color:#fff;border-radius:999px;padding:5px 11px;font-size:11px}
+.light .pcard.main .glow{display:none}
+/* stopka: ciemna, jak w Tanich Oryginałach – w obu motywach */
+footer.pf{background:#121212!important;color:#F4F0E7;--bg:#121212;--fg:#F4F0E7;--mut:#A8A296;--dim:#8C877C;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);--card:#1C1C1C;--gold:#C9A35E}
+footer.pf .lead-row h3{color:#F4F0E7}
+footer.pf .btn.pri{background:var(--gold);color:#121212}
+footer.pf .btn.pri:hover{background:#DDBA78}
+footer.pf .fstage .mark{background:linear-gradient(180deg,rgba(201,163,94,.12),rgba(201,163,94,.02) 85%)!important;-webkit-background-clip:text!important;background-clip:text!important}
+footer.pf .social a{background:#1F1F1F;border-color:rgba(255,255,255,.1);color:#F4F0E7;border-radius:14px}
+footer.pf .totop{color:#F4F0E7;border-color:rgba(255,255,255,.16);background:transparent}
+.fbrand{display:none}
+footer.pf .cols .lbl,footer.pf .cols .hrs{display:none!important}
+@media(max-width:700px){
+ footer.pf .lead-row{text-align:center;justify-items:center;padding-block:52px 40px}
+ footer.pf .lead-row h3{margin-inline:auto;font-size:28px}
+ footer.pf .lead-row .act{justify-items:center}
+ .fbrand{display:grid;justify-items:center;text-align:center;gap:14px;padding:34px 0 30px;border-top:1px solid var(--line)}
+ .fbrand .lg{font-family:var(--font-display);font-weight:900;font-size:40px;letter-spacing:-.04em;color:#fff;text-decoration:none;line-height:1}
+ .fbrand .lg span{color:var(--gold)}
+ .fbrand p{color:var(--mut);font-size:16px;line-height:1.6;max-width:30ch}
+ .fbrand .social{display:flex;gap:10px;margin-top:6px}
+ .fbrand .social a{width:52px;height:52px;display:grid;place-items:center}
+ .fbrand .social svg{width:22px;height:22px}
+ .pf .cols>div:not(.acc) .social{display:none!important}
+ .pf .cols>div:nth-child(4){display:none!important}
+ .pf .cols h4{font-size:14px;letter-spacing:.32em;padding:26px 0;color:#F4F0E7}
+ .pf .cols .acc h4::after{content:"+";width:auto;height:auto;border:0;transform:none!important;color:var(--gold);font-size:26px;font-weight:300;letter-spacing:0;line-height:1}
+ .pf .cols .acc.open h4::after{content:"–"}
+ .pf .cols .acc.open>a{justify-content:center;font-size:17px;padding:10px 0;color:#F4F0E7}
+ .pf .cols .acc{text-align:center}
+ .pf .cols .acc h4{justify-content:space-between}
+ .pf .cols>div:nth-child(3){text-align:center;border-bottom:0!important;padding:26px 0 10px!important}
+ .pf .cols>div:nth-child(3) h4{justify-content:center;padding:0 0 22px}
+ .pf .cols>div:nth-child(3) .lbl{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin:14px 0 4px}
+ .pf .cols>div:nth-child(3)>a{justify-content:center;font-size:21px;font-weight:600;color:#fff}
+ .pf .cols>div:nth-child(3)>span.m{display:none!important}
+ .pf .cols>div:nth-child(3)>span.hrs{display:block!important;color:#fff;font-size:17px}
+ .pf .cols>div:nth-child(3) .lbl{display:block!important}
+ .pf .legal{align-items:center!important;text-align:center;font-size:13px;letter-spacing:.04em;color:var(--dim)}
+ .pf .legal span{display:block}
+}
+@media(max-width:700px){
+ .pf .cols .acc.open>a,.pf .cols>div:nth-child(3)>a{margin-inline:auto}
+ .pf .cols>div:nth-child(3)>a::before,.pf .cols .acc>a::before{display:none!important}
+}
