@@ -323,6 +323,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
 (function(){
  // karuzele
  var sel=['.pillars','.pz'];if(!document.getElementById('cfil'))sel.push('.cgrid');
+ [].forEach.call(document.querySelectorAll('.grid3,.grid4'),function(g){if(g.querySelector(':scope>.feat'))g.classList.add('flist');else if(g.querySelector(':scope>.pc'))g.classList.add('pcs-sw');});sel.push('.pcs-sw');
  sel.forEach(function(s){[].forEach.call(document.querySelectorAll(s),function(el){
   if(el.classList.contains('swipe')||el.children.length<2)return;el.classList.add('swipe');
   var d=document.createElement('div');d.className='sdots';

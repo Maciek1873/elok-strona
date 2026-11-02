@@ -1176,3 +1176,41 @@ footer.pf .cols .lbl,footer.pf .cols .hrs{display:none!important}
  .pf .cols .acc.open>a,.pf .cols>div:nth-child(3)>a{margin-inline:auto}
  .pf .cols>div:nth-child(3)>a::before,.pf .cols .acc>a::before{display:none!important}
 }
+/* ===== v12: podstrony na telefonie bez ścian boxów ===== */
+.light .phero2{--tint:rgba(168,135,90,.12)!important;--tc:var(--gold)!important;--halo:rgba(168,135,90,.10)!important}
+@media(max-width:700px){
+ /* listy funkcji: jedna karta z wierszami zamiast osobnych boxów */
+ .flist{grid-template-columns:1fr!important;gap:0!important;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+ .flist>.feat{display:grid!important;grid-template-columns:40px 1fr;column-gap:14px;row-gap:3px;align-items:start;padding:16px 18px;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important}
+ .flist>.feat:last-child{border-bottom:0!important}
+ .flist>.feat .ico{grid-row:1 / span 3;width:40px;height:40px;border-radius:12px}
+ .flist>.feat .ico svg{width:19px;height:19px}
+ .flist>.feat h3{font-size:16.5px;line-height:1.3;margin:0}
+ .flist>.feat p{font-size:14.5px;line-height:1.5}
+ .flist>.feat .ex{padding-top:4px;font-size:12px}
+ /* przykład z branż: zwarte wiersze */
+ .stage{padding:18px 16px;min-height:0;border-radius:22px}
+ .stage .ttl{margin-bottom:12px;gap:4px}
+ .stage .ttl h3{font-size:21px}
+ .flowx{grid-template-columns:1fr!important;row-gap:0!important;gap:0}
+ .flowx::before{display:block!important;left:21px;right:auto;top:22px;bottom:22px;width:2px;height:auto}
+ .node{display:grid!important;grid-template-columns:44px 1fr;column-gap:14px;row-gap:1px;padding:8px 0;align-items:center}
+ .node .ic{width:44px;height:44px;border-radius:14px;grid-row:1 / span 3}
+ .node .ic svg{width:20px;height:20px}
+ .node.on .ic{box-shadow:0 0 0 4px rgba(207,168,94,.10)}
+ .node b{font-size:15.5px}.node small{font-size:13.5px;line-height:1.35}.node .t{font-size:10.5px}
+ .node>*:not(.ic){grid-column:2}
+ .res{margin-top:16px;padding-top:14px;gap:10px}
+ .idea{padding:18px;gap:12px}.idea b{font-size:19px}
+ .idea .btn{width:100%;justify-content:center}
+ /* zasady / listy tekstowe */
+ .tabs{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px}
+ .tabs::-webkit-scrollbar{display:none}
+ .tabs button{flex:none}
+ .split{gap:22px}
+ .shot figcaption{font-size:13px}
+ .kpi b{font-size:40px}
+ .faq details{border-radius:16px}
+ .faq summary{font-size:16px;padding:16px 18px}
+}
+.light h1 span[style*="color:#"]{color:var(--gold)!important}
