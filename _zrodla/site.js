@@ -332,10 +332,6 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
   function upd(){var x=el.scrollLeft,best=0,bd=1e9;for(var i=0;i<el.children.length;i++){var o=Math.abs(el.children[i].offsetLeft-el.children[0].offsetLeft-x);if(o<bd){bd=o;best=i;}}[].forEach.call(d.children,function(e,k){e.classList.toggle('on',k===best);});}
   el.addEventListener('scroll',function(){clearTimeout(el._t);el._t=setTimeout(upd,60);},{passive:true});upd();
  });});
- // stopka: Usługi i Firma rozwijane na telefonie
- var cols=document.querySelectorAll('.pf .cols>div');
- for(var i=0;i<cols.length&&i<2;i++){(function(c){c.classList.add('acc');var h=c.querySelector('h4');if(!h)return;h.setAttribute('role','button');h.setAttribute('tabindex','0');
-  h.addEventListener('click',function(){if(innerWidth<=700)c.classList.toggle('open');});})(cols[i]);}
  // nowe menu na telefonie
  var nav=document.getElementById('nav'),bg=document.getElementById('burger');if(!nav||!bg)return;
  var I=function(p){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';};
@@ -361,11 +357,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  var st=document.querySelector('.pf .fstage');if(!st||document.querySelector('.fbrand'))return;
  var soc=document.querySelector('.pf .social');
  var fb=document.createElement('div');fb.className='fbrand';
- fb.innerHTML='<a class="lg" href="index.html">ELOK<span>.</span></a><p>Automatyzacje, strony i marketing dla firm. Konsultacje online w całej Polsce.</p>'+(soc?'<div class="social">'+soc.innerHTML+'</div>':'');
+ fb.innerHTML='<div><a class="lg" href="index.html">ELOK<span>.</span></a><p>Automatyzacje, strony i marketing dla firm. Konsultacje online w całej Polsce.</p></div>'+(soc?'<div class="social">'+soc.innerHTML+'</div>':'');
  st.parentNode.insertBefore(fb,st);
- var k=document.querySelectorAll('.pf .cols>div')[2];
- if(k){var a=k.querySelectorAll('a[href^="tel:"],a[href^="mailto:"]');
-  [].forEach.call(a,function(x){var l=document.createElement('span');l.className='lbl';l.textContent=x.href.indexOf('tel:')===0?'Telefon':'E-mail';x.parentNode.insertBefore(l,x);});
-  var m=k.querySelector('.m');if(m){var l2=document.createElement('span');l2.className='lbl';l2.textContent='Godziny';var hrs=document.createElement('span');hrs.className='hrs';hrs.textContent='pon.–pt. 9:00–17:00';m.parentNode.insertBefore(l2,m);m.parentNode.insertBefore(hrs,m);}}
  var lg=document.querySelector('.pf .legal span');if(lg&&lg.textContent.indexOf('NIP')<0)lg.innerHTML+=' · NIP 1231588867';
 })();
