@@ -319,3 +319,37 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  b.addEventListener('click',function(){var l=document.body.classList.toggle('light');try{localStorage.setItem('elok_motyw',l?'jasny':'ciemny');}catch(e){}
   var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',l?'#FFFFFF':'#08080A');try{if(window.elokEv)elokEv('motyw',l?'jasny':'ciemny');}catch(e){}});
 })();
+/* ===== v10: karuzele na telefonie, stopka z rozwijaniem, nowe menu ===== */
+(function(){
+ // karuzele
+ var sel=['.pillars','.pz'];if(!document.getElementById('cfil'))sel.push('.cgrid');
+ sel.forEach(function(s){[].forEach.call(document.querySelectorAll(s),function(el){
+  if(el.classList.contains('swipe')||el.children.length<2)return;el.classList.add('swipe');
+  var d=document.createElement('div');d.className='sdots';
+  for(var i=0;i<el.children.length;i++){var b=document.createElement('i');(function(i){b.addEventListener('click',function(){var c=el.children[i];el.scrollTo({left:c.offsetLeft-el.children[0].offsetLeft,behavior:'smooth'});});})(i);d.appendChild(b);}
+  el.parentNode.insertBefore(d,el.nextSibling);
+  function upd(){var x=el.scrollLeft,best=0,bd=1e9;for(var i=0;i<el.children.length;i++){var o=Math.abs(el.children[i].offsetLeft-el.children[0].offsetLeft-x);if(o<bd){bd=o;best=i;}}[].forEach.call(d.children,function(e,k){e.classList.toggle('on',k===best);});}
+  el.addEventListener('scroll',function(){clearTimeout(el._t);el._t=setTimeout(upd,60);},{passive:true});upd();
+ });});
+ // stopka: Usługi i Firma rozwijane na telefonie
+ var cols=document.querySelectorAll('.pf .cols>div');
+ for(var i=0;i<cols.length&&i<2;i++){(function(c){c.classList.add('acc');var h=c.querySelector('h4');if(!h)return;h.setAttribute('role','button');h.setAttribute('tabindex','0');
+  h.addEventListener('click',function(){if(innerWidth<=700)c.classList.toggle('open');});})(cols[i]);}
+ // nowe menu na telefonie
+ var nav=document.getElementById('nav'),bg=document.getElementById('burger');if(!nav||!bg)return;
+ var I=function(p){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';};
+ var AR='<em>'+I('<path d="M9 6l6 6-6 6"/>').replace('<svg','<svg width="16" height="16"')+'</em>';
+ var mm=document.createElement('div');mm.className='mm';mm.setAttribute('aria-label','Menu');
+ mm.innerHTML='<div class="lab">Usługi</div><div class="svc">'+
+  '<a href="automatyzacje.html"><i>'+I('<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>')+'</i><div><b>Automatyzacje i systemy</b><span>Panele, CRM, faktury, integracje</span></div>'+AR+'</a>'+
+  '<a href="strony.html"><i>'+I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/>')+'</i><div><b>Strony i sklepy</b><span>Szybkie strony, które zbierają zapytania</span></div>'+AR+'</a>'+
+  '<a href="marketing.html"><i>'+I('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>')+'</i><div><b>Marketing</b><span>Google, Facebook, Instagram, TikTok</span></div>'+AR+'</a></div>'+
+  '<div class="lab">Firma</div><div class="lst"><a href="realizacje.html">Case studies'+AR+'</a><a href="cennik.html">Cennik'+AR+'</a><a href="o-nas.html">O nas'+AR+'</a><a href="blog.html">Blog'+AR+'</a><a href="kontakt.html">Kontakt'+AR+'</a></div>'+
+  '<div class="qk"><a href="tel:+48455505820">Zadzwoń<b>455 505 820</b></a><a href="mailto:kontakt@elok-agency.pl">Napisz<b>e-mail</b></a></div>'+
+  '<a class="btn pri go" href="konsultacja.html">Umów bezpłatną konsultację <span class="ar">→</span></a>';
+ document.body.appendChild(mm);
+ function set(o){mm.style.setProperty('--mmtop',nav.getBoundingClientRect().bottom+'px');mm.classList.toggle('on',o);document.body.classList.toggle('mm-lock',o);}
+ bg.addEventListener('click',function(){setTimeout(function(){set(nav.classList.contains('open'));},0);});
+ mm.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');bg.setAttribute('aria-expanded','false');set(false);}});
+ addEventListener('resize',function(){if(innerWidth>700&&mm.classList.contains('on')){nav.classList.remove('open');set(false);}});
+})();
