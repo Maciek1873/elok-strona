@@ -233,3 +233,10 @@ footer.pf{background:var(--bg2);border-top:0}
  .light .pf .fstage .mark{background:linear-gradient(180deg,rgba(11,11,12,.06),rgba(11,11,12,.015) 90%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent}
  .light .pf .fstage .mark span{display:inline!important;background:linear-gradient(180deg,rgba(168,135,90,.45),rgba(168,135,90,.08))!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent}
 }
+/* napis ELOK w tle: zwykły kolor zamiast gradientu (Safari) */
+@media(min-width:701px){
+ .pf .fstage .mark{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:rgba(201,163,94,.07)!important;-webkit-text-fill-color:rgba(201,163,94,.07)!important}
+ .pf .fstage .mark span{background:none!important;color:rgba(201,163,94,.35)!important;-webkit-text-fill-color:rgba(201,163,94,.35)!important}
+ .light .pf .fstage .mark{color:rgba(11,11,12,.045)!important;-webkit-text-fill-color:rgba(11,11,12,.045)!important}
+ .light .pf .fstage .mark span{color:rgba(168,135,90,.4)!important;-webkit-text-fill-color:rgba(168,135,90,.4)!important}
+}
