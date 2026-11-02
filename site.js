@@ -20,7 +20,7 @@ if(cv){var cx=cv.getContext('2d'),W,H,DPR=Math.min(2,devicePixelRatio||1),P=[],p
   var frame=function(){cx.clearRect(0,0,W,H);
     for(var i=0;i<P.length;i++){var p=P[i];if(!red){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;var dx=mx-p.x,dy=my-p.y,dd=Math.sqrt(dx*dx+dy*dy);if(dd<180&&dd>1){p.x+=dx/dd*.35;p.y+=dy/dd*.35;}}}
     for(var i=0;i<P.length;i++)for(var j=i+1;j<P.length;j++){var a=P[i],b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<D){var al=1-d/D,near=Math.max(0,1-Math.hypot((a.x+b.x)/2-mx,(a.y+b.y)/2-my)/260);cx.strokeStyle='rgba(207,168,94,'+(al*.2+near*al*.5)+')';cx.lineWidth=.8;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();if(!red&&Math.random()<.0009)pk.push({a:a,b:b,t:0});}}
+      if(d<D){var al=1-d/D,near=Math.max(0,1-Math.hypot((a.x+b.x)/2-mx,(a.y+b.y)/2-my)/260);cx.strokeStyle=(document.body.classList.contains('light')?'rgba(11,11,12,':'rgba(207,168,94,')+(al*.2+near*al*.5)*(document.body.classList.contains('light')?.6:1)+')';cx.lineWidth=.8;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();if(!red&&Math.random()<.0009)pk.push({a:a,b:b,t:0});}}
     for(var i=0;i<P.length;i++){var p=P[i];cx.fillStyle='rgba(240,215,159,.75)';cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill();}
     for(var k=pk.length-1;k>=0;k--){var q=pk[k];q.t+=.018;if(q.t>=1){pk.splice(k,1);continue;}var x=q.a.x+(q.b.x-q.a.x)*q.t,y=q.a.y+(q.b.y-q.a.y)*q.t,g=cx.createRadialGradient(x,y,0,x,y,10);g.addColorStop(0,'rgba(255,230,170,.95)');g.addColorStop(1,'rgba(207,168,94,0)');cx.fillStyle=g;cx.beginPath();cx.arc(x,y,10,0,7);cx.fill();}
     if(!red)requestAnimationFrame(frame);};
@@ -145,7 +145,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  var MF=['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'],MG=['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'],DF=['niedziela','poniedziałek','wtorek','środa','czwartek','piątek','sobota'];
  var now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),max=new Date(today);max.setDate(max.getDate()+60);
  var view=new Date(today.getFullYear(),today.getMonth(),1),selD=null,selT=null;
- var API='https://panel.elok-agency.pl/strona/',LIVE=/(^|\.)elok-agency\.pl$/.test(location.hostname),BUSY={},OFF={};
+ var API='https://panel.elok-agency.pl/strona/',LIVE=/^(www\.)?elok-agency\.pl$/.test(location.hostname),BUSY={},OFF={};
  function p2(n){return (n<10?'0':'')+n;} function ymd(d){return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());}
  var grid=document.getElementById('cgrid'),lab=document.getElementById('clab'),prev=document.getElementById('cprev'),next=document.getElementById('cnext'),slotsEl=document.getElementById('slots'),sd=document.getElementById('slotdate'),sum=document.getElementById('bsum'),form=document.getElementById('bform'),done=document.getElementById('bdone');
  function fmt(d){return DF[d.getDay()]+', '+d.getDate()+' '+MG[d.getMonth()];}
@@ -258,7 +258,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
 [].forEach.call(document.querySelectorAll('.totop'),function(b){b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});});
 /* ===== własne statystyki (bez cookies, bez IP) -> panel ===== */
 (function(){var EP='https://panel.elok-agency.pl/strona/?a=ev';
- if(!/(^|\.)elok-agency\.pl$/.test(location.hostname))return;
+ if(!/^(www\.)?elok-agency\.pl$/.test(location.hostname))return;
  var q=location.search;
  try{if(/[?&]nielicz=1/.test(q))localStorage.setItem('elok_ja','1');if(/[?&]nielicz=0/.test(q))localStorage.removeItem('elok_ja');if(localStorage.getItem('elok_ja')==='1'){window.elokEv=function(){};return;}}catch(e){}
  function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v);}catch(e){return null;}}
@@ -291,6 +291,7 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
    Identyfikatory ustawiasz w panelu: panel.elok-agency.pl/strona/admin.php -> Podłączenia */
 (function(){var C=window.ELOK_CFG||{},CFG={clarity:C.clarity||'',ga4:C.ga4||'',metaPixel:C.metaPixel||'',tiktokPixel:C.tiktokPixel||'',gads:C.gads||'',gadsLabel:C.gadsLabel||''};
  window.elokKonwersja=function(){try{if(window.fbq)fbq('track','Schedule');if(window.gtag){gtag('event','generate_lead');if(CFG.gads&&CFG.gadsLabel)gtag('event','conversion',{send_to:CFG.gads+'/'+CFG.gadsLabel});}if(window.ttq)ttq.track('SubmitForm');}catch(e){}};
+ document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('[data-cookies]'):null;if(!a)return;e.preventDefault();try{localStorage.removeItem('elok_zgoda');}catch(x){}location.reload();});
  var any=CFG.clarity||CFG.ga4||CFG.metaPixel||CFG.tiktokPixel||CFG.gads;if(!any)return;
  function get(){try{return localStorage.getItem('elok_zgoda');}catch(e){return null;}}
  function set(v){try{localStorage.setItem('elok_zgoda',v);}catch(e){}}
@@ -306,4 +307,57 @@ $$('form.f').forEach(function(f){f.addEventListener('submit',function(e){e.preve
  bar.innerHTML='<p>Używamy plików cookies do statystyk i reklam. Możesz się zgodzić albo zostawić tylko niezbędne. <a href="cookies.html">Szczegóły</a></p><div><button type="button" class="btn sec" data-z="nie">Tylko niezbędne</button><button type="button" class="btn pri" data-z="tak">Akceptuję</button></div>';
  document.body.appendChild(bar);
  [].forEach.call(bar.querySelectorAll('button'),function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-z');set(v);bar.remove();if(v==='tak')load();});});
+})();
+/* pasek wersji testowej (tylko na test.elok-agency.pl) */
+(function(){if(!/^test\./.test(location.hostname))return;var s=document.createElement('style');s.textContent='#testbar{position:fixed;left:0;right:0;top:0;z-index:100;background:#B08A3E;color:#fff;font:600 13px/1.3 Figtree,Arial,sans-serif;text-align:center;padding:7px 12px}body{padding-top:32px}.nav{top:32px!important}';document.head.appendChild(s);var b=document.createElement('div');b.id='testbar';b.textContent='WERSJA TESTOWA – tak będzie wyglądać strona po zatwierdzeniu w panelu (Aktualizacje)';document.body.appendChild(b);})();
+/* przełącznik jasny / ciemny (wybór zapamiętany w przeglądarce) */
+(function(){var bar=document.querySelector('.nav .bar');if(!bar)return;
+ var b=document.createElement('button');b.type='button';b.className='mswitch';b.setAttribute('aria-label','Zmień kolor strony: jasny lub ciemny');b.title='Jasny / ciemny';
+ b.innerHTML='<svg class="ms-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ms-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+ var cta=bar.querySelector('.btn.pri');var burger=bar.querySelector('.burger,.menu-btn,[aria-controls]');
+ if(cta&&cta.parentNode===bar)bar.insertBefore(b,cta);else if(burger&&burger.parentNode===bar)bar.insertBefore(b,burger);else bar.appendChild(b);
+ b.addEventListener('click',function(){var l=document.body.classList.toggle('light');try{localStorage.setItem('elok_motyw',l?'jasny':'ciemny');}catch(e){}
+  var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',l?'#FFFFFF':'#08080A');try{if(window.elokEv)elokEv('motyw',l?'jasny':'ciemny');}catch(e){}});
+})();
+/* ===== v10: karuzele na telefonie, stopka z rozwijaniem, nowe menu ===== */
+(function(){
+ // karuzele
+ var sel=['.pillars','.pz'];if(!document.getElementById('cfil'))sel.push('.cgrid');
+ [].forEach.call(document.querySelectorAll('.grid3,.grid4'),function(g){if(g.querySelector(':scope>.feat'))g.classList.add('flist');else if(g.querySelector(':scope>.pc'))g.classList.add('pcs-sw');});sel.push('.pcs-sw');
+ sel.forEach(function(s){[].forEach.call(document.querySelectorAll(s),function(el){
+  if(el.classList.contains('swipe')||el.children.length<2)return;el.classList.add('swipe');
+  var d=document.createElement('div');d.className='sdots';
+  for(var i=0;i<el.children.length;i++){var b=document.createElement('i');(function(i){b.addEventListener('click',function(){var c=el.children[i];el.scrollTo({left:c.offsetLeft-el.children[0].offsetLeft,behavior:'smooth'});});})(i);d.appendChild(b);}
+  el.parentNode.insertBefore(d,el.nextSibling);
+  function upd(){var x=el.scrollLeft,best=0,bd=1e9;for(var i=0;i<el.children.length;i++){var o=Math.abs(el.children[i].offsetLeft-el.children[0].offsetLeft-x);if(o<bd){bd=o;best=i;}}[].forEach.call(d.children,function(e,k){e.classList.toggle('on',k===best);});}
+  el.addEventListener('scroll',function(){clearTimeout(el._t);el._t=setTimeout(upd,60);},{passive:true});upd();
+ });});
+ // nowe menu na telefonie
+ var nav=document.getElementById('nav'),bg=document.getElementById('burger');if(!nav||!bg)return;
+ var I=function(p){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';};
+ var AR='<em>'+I('<path d="M9 6l6 6-6 6"/>').replace('<svg','<svg width="16" height="16"')+'</em>';
+ var mm=document.createElement('div');mm.className='mm';mm.setAttribute('aria-label','Menu');
+ mm.innerHTML='<div class="lab">Usługi</div><div class="svc">'+
+  '<a href="automatyzacje.html"><i>'+I('<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>')+'</i><div><b>Automatyzacje i systemy</b><span>Panele, CRM, faktury, integracje</span></div>'+AR+'</a>'+
+  '<a href="strony.html"><i>'+I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/>')+'</i><div><b>Strony i sklepy</b><span>Szybkie strony, które zbierają zapytania</span></div>'+AR+'</a>'+
+  '<a href="marketing.html"><i>'+I('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>')+'</i><div><b>Marketing</b><span>Google, Facebook, Instagram, TikTok</span></div>'+AR+'</a></div>'+
+  '<div class="lab">Firma</div><div class="lst"><a href="realizacje.html">Case studies'+AR+'</a><a href="cennik.html">Cennik'+AR+'</a><a href="o-nas.html">O nas'+AR+'</a><a href="blog.html">Blog'+AR+'</a><a href="kontakt.html">Kontakt'+AR+'</a></div>'+
+  '<div class="qk"><a href="tel:+48455505820">Zadzwoń<b>455 505 820</b></a><a href="mailto:kontakt@elok-agency.pl">Napisz<b>e-mail</b></a></div>'+
+  '<a class="btn pri go" href="konsultacja.html">Umów bezpłatną konsultację <span class="ar">→</span></a>';
+ document.body.appendChild(mm);
+ function set(o){mm.style.setProperty('--mmtop',nav.getBoundingClientRect().bottom+'px');mm.classList.toggle('on',o);document.body.classList.toggle('mm-lock',o);}
+ bg.addEventListener('click',function(){setTimeout(function(){set(nav.classList.contains('open'));},0);});
+ mm.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');bg.setAttribute('aria-expanded','false');set(false);}});
+ addEventListener('resize',function(){if(innerWidth>700&&mm.classList.contains('on')){nav.classList.remove('open');set(false);}});
+})();
+/* ===== v11: karuzele bez animacji wjazdu + stopka jak w TO ===== */
+(function(){
+ [].forEach.call(document.querySelectorAll('.swipe>*'),function(c){c.classList.remove('pre');});
+ [].forEach.call(document.querySelectorAll('.swipe .tilt'),function(c){c.classList.remove('tilt');});
+ var st=document.querySelector('.pf .fstage');if(!st||document.querySelector('.fbrand'))return;
+ var soc=document.querySelector('.pf .social');
+ var fb=document.createElement('div');fb.className='fbrand';
+ fb.innerHTML='<div><a class="lg" href="index.html">ELOK<span>.</span></a><p>Automatyzacje, strony i marketing dla firm. Konsultacje online w całej Polsce.</p></div>'+(soc?'<div class="social">'+soc.innerHTML+'</div>':'');
+ st.parentNode.insertBefore(fb,st);
+ var lg=document.querySelector('.pf .legal span');if(lg&&lg.textContent.indexOf('NIP')<0)lg.innerHTML+=' · NIP 1231588867';
 })();
