@@ -1208,3 +1208,22 @@ footer.pf{background:var(--bg2);border-top:0}
  .pf .legal{flex-direction:column;align-items:flex-start;gap:8px;font-size:13.5px;padding-block:22px 30px;margin-top:18px}
 }
 @media(max-width:700px){.pf .lead-row .act .btn{font-size:15.5px;padding:15px 18px;white-space:nowrap}}
+/* ===== v14: stopka wyśrodkowana, bez dużej karty z hasłem ===== */
+.pf .lead-row{display:none!important}
+.fbrand{flex-direction:column;align-items:center;text-align:center;justify-content:center;gap:16px;padding:clamp(40px,5vw,60px) 0 28px}
+.fbrand p{margin-inline:auto}
+.pf .cols{text-align:center}
+.pf .cols>div{display:flex;flex-direction:column;align-items:center}
+.pf .cols a{margin-inline:auto}
+.pf .legal{justify-content:center!important;align-items:center!important;text-align:center;flex-direction:column;gap:10px}
+.pf .legal span{display:block}
+@media(max-width:700px){
+ .fbrand{align-items:center!important}
+ .pf .cols>div:nth-child(1),.pf .cols>div:nth-child(2){align-items:center}
+ .pf .cols>div:nth-child(1)>a,.pf .cols>div:nth-child(2)>a{justify-content:center}
+ .pf .cols>div:nth-child(3){justify-items:stretch;text-align:center}
+ .pf .cols>div:nth-child(3)>a{justify-content:center;margin-inline:0}
+ .pf .cols>div:nth-child(4){align-items:center}
+ .pf .legal{align-items:center!important}
+}
+@media(max-width:700px){.pf .cols>div:nth-child(4){flex-direction:row!important;flex-wrap:wrap;justify-content:center;column-gap:4px}.pf .cols>div:nth-child(4) h4,.pf .cols>div:nth-child(4) .m{flex-basis:100%}}
