@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /demo.html
+Disallow: /partsplayers/
 
 Sitemap: https://elok-agency.pl/sitemap.xml
