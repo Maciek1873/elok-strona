@@ -1,4 +1,5 @@
 # Generuje landing pages pod kampanie Google Ads: strona-dla-firmy, sklep-internetowy, automatyzacja-ai.
+# UWAGA: po wdrożeniu teksty landingów edytuje się w panelu (Edytor strony). Nie uruchamiaj ponownie bez przeniesienia tamtych zmian, bo je nadpiszesz.
 # Uruchom: python3 _zrodla/landingi.py  (z katalogu repo)
 import os, html
 
