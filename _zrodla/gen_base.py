@@ -102,7 +102,7 @@ CHART='''<div class="chart rv" aria-label="Przykładowy wykres zapytań z reklam
 
 def priceCards(mini=False):
     C=[('Automatyzacje','600','zł netto','wdrożenie','Pojedynczy automat lub integracja, np. przypomnienia SMS, raport na maila, połączenie dwóch programów.',['analiza procesu','wdrożenie i testy','instrukcja dla zespołu'],True,'automatyzacje.html'),
-       ('Strona WWW','1 500','zł netto','jednorazowo','Szybka strona firmowa albo landing z formularzem wyceny, który trafia prosto do panelu.',['projekt i kodowanie','SEO i analityka','formularz z powiadomieniem'],False,'strony.html'),
+       ('Strona WWW','800','zł netto','jednorazowo','Szybka strona firmowa albo landing z formularzem wyceny, który trafia prosto do panelu.',['projekt i kodowanie','SEO i analityka','formularz z powiadomieniem'],False,'strony.html'),
        ('Sklep online','6 000','zł netto','jednorazowo','Sklep z płatnościami, wysyłką i połączeniem z magazynem lub marketplace.',['płatności i dostawy','integracje','szkolenie z obsługi'],False,'strony.html'),
        ('Marketing','700','zł netto / mc','+ budżet reklamowy','Prowadzenie kampanii Google, Meta lub TikTok z miesięcznym raportem wyników.',['strategia i kreacje','optymalizacja','raport co miesiąc'],False,'marketing.html')]
     out='<div class="prices">'
@@ -113,7 +113,7 @@ def priceCards(mini=False):
     return out+'</div>'
 
 FAQ_MAIN=[('Czy muszę zmieniać programy, których używam?','Zwykle nie. Najczęściej łączymy to, co już masz: program do faktur, sklep, pocztę, kalendarz albo katalog. Nowy panel zbiera wszystko w jednym miejscu.'),
- ('Ile to kosztuje?','Ceny zaczynają się od 600 zł netto za automatyzację i 1 500 zł netto za stronę. Dokładną kwotę podajemy po konsultacji, przed startem prac.'),
+ ('Ile to kosztuje?','Ceny zaczynają się od 600 zł netto za automatyzację i 800 zł netto za stronę. Dokładną kwotę podajemy po konsultacji, przed startem prac.'),
  ('Czy to tylko dla dużych firm?','Nie. Najwięcej zyskują małe firmy, w których właściciel robi wszystko sam. Kilka prostych automatów oddaje mu godziny każdego dnia.'),
  ('Jak długo trwa wdrożenie?','To zależy od zakresu. Prosty automat to zwykle kilka dni, większy system lub sklep to kilka tygodni. Termin dostajesz razem z wyceną.'),
  ('Czy wystawiacie fakturę VAT?','Tak. ELOK to polska spółka, każda usługa jest na fakturę VAT.')]

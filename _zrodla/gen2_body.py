@@ -30,8 +30,8 @@ CASES2='''<div class="cases">
 </div>'''
 
 PRICES=[('Automatyzacje i systemy','pojedyncze automaty, panele, CRM, faktury, integracje','od 600 zł','jednorazowo'),
- ('Strona internetowa','strona firmowa albo landing z formularzem','od 1 500 zł','jednorazowo'),
- ('Sklep internetowy','płatności, wysyłki, połączenie z magazynem lub Allegro','od 2 500 zł','jednorazowo'),
+ ('Strona internetowa','strona firmowa albo landing z formularzem','od 800 zł','jednorazowo'),
+ ('Sklep internetowy','płatności, wysyłki, połączenie z magazynem lub Allegro','od 1 800 zł','jednorazowo'),
  ('Kampanie reklamowe','Google, Facebook i Instagram, TikTok','od 700 zł','miesięcznie + budżet reklam')]
 def ptable(rows=PRICES):
     return '<div class="tablewrap rv"><table class="ptable"><thead><tr><th>Usługa</th><th>Cena netto</th><th>Rozliczenie</th></tr></thead><tbody>'+''.join('<tr><td><b>%s</b><span>%s</span></td><td class="p">%s</td><td>%s</td></tr>'%r for r in rows)+'</tbody></table></div>'
@@ -62,7 +62,7 @@ pages['index.html']=(head('ELOK Agency','Automatyzacje, strony i marketing dla f
 <section><div class="wrap">'''+shead('Czym się zajmujemy','Trzy usługi. <span class="g">Jeden zespół.</span>','Wybierz, co Cię interesuje. Na każdej stronie znajdziesz szczegóły, przykłady i ceny.')+'''
 <div class="pillars">
 <a class="pcard main rv tilt" href="automatyzacje.html"><div class="glow"></div><span class="n">GŁÓWNA SPECJALIZACJA</span><h3>Automatyzacje i systemy</h3><p>Rzeczy, które dziś robisz ręcznie, zaczynają dziać się same.</p><ul><li>panele i CRM pod Twoją firmę</li><li>faktury, KSeF i płatności</li><li>SMS-y, maile i przypomnienia</li><li>połączenie programów, których używasz</li></ul><div class="foot"><span class="price">od <b>600 zł</b> netto</span><span class="link">Zobacz →</span></div></a>
-<a class="pcard rv tilt" href="strony.html"><div class="glow"></div><span class="n">USŁUGA</span><h3>Strony i sklepy</h3><p>Szybkie strony, z których zapytania trafiają prosto do Ciebie.</p><ul><li>strony firmowe</li><li>sklepy internetowe</li><li>widoczność w Google</li></ul><div class="foot"><span class="price">od <b>1 500 zł</b> netto</span><span class="link">Zobacz →</span></div></a>
+<a class="pcard rv tilt" href="strony.html"><div class="glow"></div><span class="n">USŁUGA</span><h3>Strony i sklepy</h3><p>Szybkie strony, z których zapytania trafiają prosto do Ciebie.</p><ul><li>strony firmowe</li><li>sklepy internetowe</li><li>widoczność w Google</li></ul><div class="foot"><span class="price">od <b>800 zł</b> netto</span><span class="link">Zobacz →</span></div></a>
 <a class="pcard rv tilt" href="marketing.html"><div class="glow"></div><span class="n">DODATEK</span><h3>Marketing</h3><p>Reklamy, które przyprowadzają nowych klientów.</p><ul><li>Google</li><li>Facebook i Instagram</li><li>TikTok</li></ul><div class="foot"><span class="price">od <b>700 zł</b> netto / mc</span><span class="link">Zobacz →</span></div></a>
 </div></div></section>
 
@@ -98,7 +98,7 @@ svc_hero('automatyzacje.html','Automatyzacje i systemy','Niech rutyna <span clas
 
 # ---------- STRONY ----------
 pages['strony.html']=(head('Strony i sklepy · ELOK','Szybkie strony i sklepy internetowe, które zbierają zapytania i sprzedają.'),
-svc_hero('strony.html','Strony i sklepy','Strona, która <span style="color:#7FD3C1">przynosi klientów.</span>','Projektujemy i budujemy szybkie strony i sklepy. Każde zapytanie z formularza od razu trafia do Twojego telefonu.','<div class="facts"><span>strona od <b>1 500 zł</b> netto</span><span>sklep od <b>2 500 zł</b> netto</span></div>',WEB_ANIM,'--tint:rgba(127,211,193,.14);--tc:#7FD3C1;--halo:rgba(127,211,193,.13)')+'''
+svc_hero('strony.html','Strony i sklepy','Strona, która <span style="color:#7FD3C1">przynosi klientów.</span>','Projektujemy i budujemy szybkie strony i sklepy. Każde zapytanie z formularza od razu trafia do Twojego telefonu.','<div class="facts"><span>strona od <b>800 zł</b> netto</span><span>sklep od <b>1 800 zł</b> netto</span></div>',WEB_ANIM,'--tint:rgba(127,211,193,.14);--tc:#7FD3C1;--halo:rgba(127,211,193,.13)')+'''
 <section class="band"><div class="wrap">'''+shead('Co dostajesz','W każdej stronie <span class="g">w standardzie.</span>')+feats([
  ('bolt','Szybkie ładowanie','Strona otwiera się błyskawicznie, także na telefonie.',''),
  ('phone','Wygodna na telefonie','Większość klientów wchodzi z telefonu, więc od tego zaczynamy.',''),
@@ -107,9 +107,9 @@ svc_hero('strony.html','Strony i sklepy','Strona, która <span style="color:#7FD
  ('pen','Łatwa edycja','Teksty i zdjęcia zmieniasz sam w prostym panelu.',''),
  ('shield','Opieka po starcie','Pomagamy i poprawiamy, gdy coś trzeba zmienić.','')])+'''</div></section>
 <section><div class="wrap">'''+shead('Rodzaje stron','Wybierz, czego potrzebujesz.')+'''<div class="grid3">
-<div class="pc rv"><span class="lab">Landing page</span><div class="am"><small>od</small><b>1 500</b><em>zł netto</em></div><p>Jedna strona pod konkretną usługę albo reklamę.</p><ul><li>projekt i wykonanie</li><li>formularz z powiadomieniem</li><li>statystyki odwiedzin</li></ul></div>
-<div class="pc rv hot"><span class="lab">Strona firmowa</span><div class="am"><small>od</small><b>1 500</b><em>zł netto</em></div><p>Kilka podstron: usługi, realizacje, cennik, kontakt.</p><ul><li>wszystko z landing page</li><li>podstrony i blog</li><li>panel do edycji</li></ul></div>
-<div class="pc rv"><span class="lab">Sklep internetowy</span><div class="am"><small>od</small><b>2 500</b><em>zł netto</em></div><p>Sklep z płatnościami, wysyłką i magazynem.</p><ul><li>płatności i dostawy</li><li>połączenie z Allegro</li><li>szkolenie z obsługi</li></ul></div>
+<div class="pc rv"><span class="lab">Landing page</span><div class="am"><small>od</small><b>800</b><em>zł netto</em></div><p>Jedna strona pod konkretną usługę albo reklamę.</p><ul><li>projekt i wykonanie</li><li>formularz z powiadomieniem</li><li>statystyki odwiedzin</li></ul></div>
+<div class="pc rv hot"><span class="lab">Strona firmowa</span><div class="am"><small>od</small><b>800</b><em>zł netto</em></div><p>Kilka podstron: usługi, realizacje, cennik, kontakt.</p><ul><li>wszystko z landing page</li><li>podstrony i blog</li><li>panel do edycji</li></ul></div>
+<div class="pc rv"><span class="lab">Sklep internetowy</span><div class="am"><small>od</small><b>1 800</b><em>zł netto</em></div><p>Sklep z płatnościami, wysyłką i magazynem.</p><ul><li>płatności i dostawy</li><li>połączenie z Allegro</li><li>szkolenie z obsługi</li></ul></div>
 </div></div></section>
 <section class="band"><div class="wrap">'''+shead('Jak powstaje strona','Od rozmowy <span class="g">do pierwszego zapytania.</span>')+steps([('Rozmowa','Ustalamy, dla kogo jest strona i co ma robić.'),('Projekt','Pokazujemy wygląd i poprawiamy, aż będzie dobrze.'),('Wykonanie','Budujemy stronę, teksty i formularze.'),('Start','Publikujemy i podpinamy zapytania pod Twój telefon.')])+'''</div></section>
 <section><div class="wrap narrow">'''+shead('Pytania','Pytania o strony')+faq([
@@ -165,7 +165,7 @@ pages['realizacja-panel.html']=(head('Case study: panel finansowy e-commerce · 
  ('chart','Analityka','Zysk netto na bieżąco, zamknięte miesiące w archiwum.','')],'grid4')+'''</div></section>'''+form('Chcesz mieć finanse <span class="g">w jednym panelu?</span>'))
 
 # ---------- CENNIK ----------
-pages['cennik.html']=(head('Cennik · ELOK','Cennik ELOK: automatyzacje od 600 zł, strony od 1 500 zł, sklepy od 2 500 zł, reklamy od 700 zł/mc.'),
+pages['cennik.html']=(head('Cennik · ELOK','Cennik ELOK: automatyzacje od 600 zł, strony od 800 zł, sklepy od 1 800 zł, reklamy od 700 zł/mc.'),
 phero('Cennik','Cennik','Ile to <span class="g">kosztuje?</span>','Poniżej ceny startowe. Dokładną cenę podajemy po krótkiej, bezpłatnej rozmowie, zawsze przed rozpoczęciem pracy.',btns=False)+'''
 <section style="padding-top:0"><div class="wrap">'''+ptable()+'''<p class="disc" style="font-size:16px">Wszystkie ceny są netto (bez VAT). Budżet na reklamy płacisz bezpośrednio Google lub Facebookowi.</p>
 <div class="callout rv"><div><b>Nie wiesz, czego potrzebujesz?</b><p>Nic nie szkodzi. Opowiedz nam o firmie, a doradzimy i podamy cenę.</p></div><a class="btn pri mag" href="#kontakt">Zapytaj o cenę <span class="ar">→</span></a></div></div></section>

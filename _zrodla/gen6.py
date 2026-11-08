@@ -6,8 +6,8 @@ def card(ic,name,amt,unit,desc,items,hot=False,badge=''):
             '<a class="btn %s mag" href="konsultacja.html">Zapytaj o wycenę <span class="ar">→</span></a></div>')%(' hot' if hot else '',('<span class="badge">%s</span>'%badge) if badge else '',name,ic,amt,unit,desc,''.join('<li>%s%s</li>'%(CHK,x) for x in items),'pri' if hot else 'sec')
 PZ=('<div class="pz">'
  +card(IC_AUTO,'Automatyzacje','600 zł','netto · jednorazowo','Pojedyncze automaty, panele, CRM, faktury i integracje.',['analiza Twojego procesu','wdrożenie i testy na Twoich danych','instrukcja dla zespołu','poprawki po starcie'],True,'Główna specjalizacja')
- +card(IC_WEB,'Strona internetowa','1 500 zł','netto · jednorazowo','Strona firmowa albo landing z formularzem wyceny.',['projekt i wykonanie','wersja na telefon','formularz z powiadomieniem','podstawy SEO i statystyki'])
- +card(IC_SHOP,'Sklep internetowy','2 500 zł','netto · jednorazowo','Płatności, wysyłki, połączenie z magazynem lub Allegro.',['karty produktów i koszyk','płatności i dostawy','połączenie z magazynem','szkolenie z obsługi'])
+ +card(IC_WEB,'Strona internetowa','800 zł','netto · jednorazowo','Strona firmowa albo landing z formularzem wyceny.',['projekt i wykonanie','wersja na telefon','formularz z powiadomieniem','podstawy SEO i statystyki'])
+ +card(IC_SHOP,'Sklep internetowy','1 800 zł','netto · jednorazowo','Płatności, wysyłki, połączenie z magazynem lub Allegro.',['karty produktów i koszyk','płatności i dostawy','połączenie z magazynem','szkolenie z obsługi'])
  +card(IC_ADS,'Kampanie reklamowe','700 zł','netto / mc + budżet reklam','Google, Facebook i Instagram, TikTok.',['plan i grupa klientów','teksty i grafiki reklam','poprawki co tydzień','raport co miesiąc'])
  +'</div>')
 PT=ptable()
