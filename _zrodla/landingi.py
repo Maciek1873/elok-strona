@@ -3,7 +3,7 @@
 # Uruchom: python3 _zrodla/landingi.py  (z katalogu repo)
 import os, html
 
-V = '2611041000'
+V = '2611121300'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>'
 IC = {
@@ -112,15 +112,13 @@ def page(p):
     a('<ul class="ticks">' + ''.join('<li>%s<span>%s</span></li>' % (TICK, t) for t in p['ticks']) + '</ul>')
     a('<div class="ctas"><a class="btn pri" href="#wycena">Wycena w 1 dzień roboczy</a><a class="btn ghost" href="/konsultacja.html">Umów rozmowę online</a></div></div>')
     # form
-    a('<div class="fcard" id="wycena"><h2>Bezpłatna wycena</h2><p class="s">Odpowiadamy w 1 dzień roboczy. Bez dzwonienia, jeśli nie chcesz.</p>')
+    a('<div class="fcard" id="wycena"><h2>Bezpłatna wycena</h2><p class="s">Zostaw telefon albo e-mail. Odezwiemy się z ceną w 1 dzień roboczy.</p>')
     a('<form id="lpform" data-zrodlo="%s" novalidate>' % p['zrodlo'])
     a('<label for="lp-co">Czego potrzebujesz?<select id="lp-co">' + ''.join('<option>%s</option>' % e(o) for o in p['co']) + '</select></label>')
     a('<label for="lp-imie">Imię<input id="lp-imie" autocomplete="name" placeholder="np. Marek" required></label>')
-    a('<label for="lp-mail">E-mail<input id="lp-mail" type="email" autocomplete="email" inputmode="email" placeholder="np. marek@firma.pl" required></label>')
-    a('<label for="lp-tel">Telefon (opcjonalnie)<input id="lp-tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="np. 600 123 456"></label>')
-    a('<label for="lp-opis">Kilka słów o firmie (opcjonalnie)<textarea id="lp-opis" rows="3" placeholder="%s"></textarea></label>' % e(p['ph']))
+    a('<label for="lp-kontakt">Telefon lub e-mail<input id="lp-kontakt" autocomplete="tel" placeholder="np. 600 123 456 albo marek@firma.pl" required></label>')
     a('<input type="hidden" id="lp-firma" value=""><input type="text" id="lp-www2" class="hpf" tabindex="-1" autocomplete="off" aria-hidden="true">')
-    a('<button class="btn gold" type="submit">Wyślij i poproś o wycenę</button><div class="ferr" id="lperr" role="alert" hidden></div>')
+    a('<button class="btn gold" type="submit">Poproś o bezpłatną wycenę</button><div class="ferr" id="lperr" role="alert" hidden></div>')
     a('<p class="note">Wysyłając, zgadzasz się na kontakt w sprawie wyceny. Szczegóły: <a href="/polityka-prywatnosci.html">polityka prywatności</a>.</p></form>')
     a('<div class="fdone" id="lpdone">%s<h3>Dziękujemy, mamy Twoje zapytanie.</h3><p>Odezwiemy się w 1 dzień roboczy. Jeśli wolisz porozmawiać od razu, wybierz termin rozmowy.</p><a class="btn ghost" href="/konsultacja.html">Umów rozmowę online</a></div></div>' % TICK.replace('<svg ', '<svg style="width:54px;height:54px" '))
     a('</div></section>')
