@@ -42,7 +42,7 @@ def form(title='Pokażemy, co da się <span class="g it">usprawnić u Ciebie.</s
     ch=lambda i,n:'<label><input type="checkbox" id="%s"%s><span>%s</span></label>'%(i,' checked' if i==pre else '',n)
     return '''<section class="final" id="kontakt"><div class="wrap"><div class="box rv">
 <div><div class="eyebrow">Bezpłatna konsultacja</div><h2 style="margin:22px 0 24px">%s</h2>
-<p class="lead">Zostaw kontakt. Odezwiemy się w ciągu jednego dnia roboczego.</p>
+<p class="lead">Zostaw kontakt. Odezwiemy się w ciągu 24 godzin.</p>
 <div class="perks"><div><i>✓</i>30 minut online, bez zobowiązań</div><div><i>✓</i>Konkretne pomysły dla Twojej branży</div><div><i>✓</i>Nawet jeśli nic nie zamówisz, zostajesz z planem</div></div>
 <div class="phone">455 505 820<small>Wolisz zadzwonić? Pon–pt, 9–17</small></div></div>
 <form class="f" novalidate>
@@ -52,7 +52,7 @@ def form(title='Pokażemy, co da się <span class="g it">usprawnić u Ciebie.</s
 <label for="f-opis">Co zabiera Ci najwięcej czasu?<textarea id="f-opis" placeholder="np. ręcznie przepisuję zamówienia z maili do systemu"></textarea></label>
 <button class="btn pri mag" type="submit" style="justify-content:center">Umów konsultację <span class="ar">→</span></button>
 <p class="note">Wysyłając, zgadzasz się na kontakt w sprawie konsultacji. Szczegóły w polityce prywatności.</p>
-<div class="done"><b>Dziękujemy!</b>Odezwiemy się w ciągu jednego dnia roboczego.</div>
+<div class="done"><b>Dziękujemy!</b>Odezwiemy się w ciągu 24 godzin.</div>
 </form></div></div></section>'''%(title,ch('o1','Automatyzacja'),ch('o2','Strona lub sklep'),ch('o3','Marketing'),ch('o4','Jeszcze nie wiem'))
 
 def phero(crumb,eyebrow,h1,lead,facts='',btns=True):

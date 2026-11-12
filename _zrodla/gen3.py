@@ -8,7 +8,7 @@ FOOT = '''<footer class="pf"><div class="wrap">
 <div class="fstage"><div class="mark" aria-hidden="true">ELOK<span>.</span></div><div class="cols">
 <div><h4>Usługi</h4><a href="automatyzacje.html">Automatyzacje i systemy</a><a href="strony.html">Strony i sklepy</a><a href="marketing.html">Marketing</a><a href="cennik.html">Cennik</a></div>
 <div><h4>Firma</h4><a href="realizacje.html">Realizacje</a><a href="o-nas.html">O nas</a><a href="kontakt.html">Kontakt</a><a href="konsultacja.html">Konsultacja</a></div>
-<div><h4>Kontakt</h4><span style="user-select:all">455 505 820</span><span style="user-select:all">kontakt@elok-agency.pl</span><span class="m">odpowiadamy w 1 dzień roboczy</span></div>
+<div><h4>Kontakt</h4><span style="user-select:all">455 505 820</span><span style="user-select:all">kontakt@elok-agency.pl</span><span class="m">odpowiadamy w ciągu 24 godzin</span></div>
 <div><h4>Godziny</h4><span>poniedziałek – piątek</span><span>9:00 – 17:00</span><span class="m">konsultacje online w całej Polsce</span></div>
 </div></div>
 <div class="legal"><span>© 2026 ELOK · polska spółka · faktura VAT</span><span><a href="#">Polityka prywatności</a> · <a href="#">Regulamin</a> · <a href="#">Cookies</a></span></div>
@@ -42,7 +42,7 @@ KONS = '''<section class="phero" style="padding-bottom:30px"><div class="wrap"><
 pages['konsultacja.html'] = (head('Umów konsultację · ELOK', 'Wybierz dzień i godzinę bezpłatnej konsultacji z ELOK.'), KONS)
 
 # ---------- KONTAKT ----------
-KONT = ('''<section class="phero"><div class="wrap"><div class="crumbs"><a href="index.html">Strona główna</a> / Kontakt</div><h1>Porozmawiajmy <span class="g">o Twojej firmie.</span></h1><p class="lead">Wybierz sposób, który Ci pasuje. Na każdą wiadomość odpowiadamy w ciągu jednego dnia roboczego.</p></div></section>
+KONT = ('''<section class="phero"><div class="wrap"><div class="crumbs"><a href="index.html">Strona główna</a> / Kontakt</div><h1>Porozmawiajmy <span class="g">o Twojej firmie.</span></h1><p class="lead">Wybierz sposób, który Ci pasuje. Na każdą wiadomość odpowiadamy w ciągu 24 godzin.</p></div></section>
 <section style="padding-top:0"><div class="wrap"><div class="cards3">
 <div class="ccard hl rv">''' + ico('cal') + '''<small>Najszybciej</small><div class="big">Konsultacja online</div><p>Wybierz dzień i godzinę w kalendarzu. 30 minut, bezpłatnie i bez zobowiązań.</p><a class="btn pri mag" href="konsultacja.html">Wybierz termin <span class="ar">→</span></a></div>
 <div class="ccard rv">''' + ico('phone') + '''<small>Telefon</small><div class="big">455 505 820</div><p>Poniedziałek – piątek, 9:00 – 17:00. Jeśli nie odbierzemy, oddzwonimy.</p><button class="btn sec" type="button" data-copy="455505820">Kopiuj numer</button></div>
@@ -54,7 +54,7 @@ KONT = ('''<section class="phero"><div class="wrap"><div class="crumbs"><a href=
     ('Czy konsultacja jest płatna?', 'Nie. Pierwsza rozmowa jest bezpłatna i do niczego nie zobowiązuje.'),
     ('Czy muszę się przygotować?', 'Nie musisz. Wystarczy, że opowiesz, jak wygląda dzień w Twojej firmie.'),
     ('Gdzie się spotykamy?', 'Online. Link do rozmowy wideo dostaniesz mailem. Pracujemy z firmami z całej Polski.'),
-    ('Jak szybko odpowiadacie?', 'Na maile i wiadomości odpowiadamy w ciągu jednego dnia roboczego.')]) + '</div></section>')
+    ('Jak szybko odpowiadacie?', 'Na maile i wiadomości odpowiadamy w ciągu 24 godzin.')]) + '</div></section>')
 pages['kontakt.html'] = (head('Kontakt · ELOK', 'Kontakt z ELOK: telefon 455 505 820, kontakt@elok-agency.pl, konsultacje online.'), KONT)
 
 # ---------- O NAS ----------

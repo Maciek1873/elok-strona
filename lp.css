@@ -139,3 +139,15 @@ footer.lf a{color:var(--mut)}
 .cookie .btn{padding:11px 16px;font-size:15px}
 .cookie .btn.sec{background:#fff;border-color:var(--line2);color:var(--fg)}
 @media(max-width:640px){.cookie{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
+/* telefon: formularz od razu pod nagłówkiem, bez przewijania */
+@media(max-width:640px){
+ .hero{padding:22px 0 40px}
+ .hero .eye,.hero .lead,.hero .ticks,.hero .ctas{display:none}
+ .hero h1{margin-bottom:12px}
+ .hero .price{margin:0}
+ .hero .price b{font-size:30px}
+ .hero .price span{font-size:14px}
+ .hero .w{gap:18px}
+ .fcard h2{font-size:22px}
+ .fcard p.s{margin-bottom:8px}
+}
