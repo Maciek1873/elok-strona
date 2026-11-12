@@ -99,8 +99,8 @@ body = body.replace(mk, EXTRA + mk.replace('<section class="band">', '<section>'
 pages['cennik.html'] = (h, body)
 
 # ---------- stopka: social + do góry ----------
-FOOT = FOOT.replace('<span class="m">odpowiadamy w 1 dzień roboczy</span></div>',
-    '<span class="m">odpowiadamy w 1 dzień roboczy</span><div class="social"><a href="https://www.tiktok.com/@elok.agency" target="_blank" rel="noopener" aria-label="TikTok">' + TT + '</a><a href="https://www.instagram.com/elok.agency" target="_blank" rel="noopener" aria-label="Instagram">' + IG + '</a></div></div>', 1)
+FOOT = FOOT.replace('<span class="m">odpowiadamy w ciągu 24 godzin</span></div>',
+    '<span class="m">odpowiadamy w ciągu 24 godzin</span><div class="social"><a href="https://www.tiktok.com/@elok.agency" target="_blank" rel="noopener" aria-label="TikTok">' + TT + '</a><a href="https://www.instagram.com/elok.agency" target="_blank" rel="noopener" aria-label="Instagram">' + IG + '</a></div></div>', 1)
 FOOT = FOOT.replace('<span><a href="#">Polityka prywatności</a> · <a href="#">Regulamin</a> · <a href="#">Cookies</a></span>',
     '<span><a href="#">Polityka prywatności</a> · <a href="#">Regulamin</a> · <a href="#">Cookies</a></span><button class="totop" type="button">Do góry ' + UP + '</button>', 1)
 NAV = NAV.replace('Usługi ▾', 'Usługi' + CHEV)

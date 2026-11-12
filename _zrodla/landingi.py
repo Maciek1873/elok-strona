@@ -26,7 +26,7 @@ PAGES = [
  dict(
   slug='strona-dla-firmy', zrodlo='strona',
   title='Strona internetowa dla firmy od 800 zł · ELOK',
-  desc='Nowoczesna strona internetowa dla firmy od 800 zł netto. Zapytania z formularza od razu trafiają na Twój telefon. Bezpłatna wycena w 1 dzień roboczy.',
+  desc='Nowoczesna strona internetowa dla firmy od 800 zł netto. Zapytania z formularza od razu trafiają na Twój telefon. Bezpłatna wycena w 24 godziny.',
   eye='Strony internetowe dla firm',
   h1='Strona, która <span class="g">sama zbiera klientów.</span>',
   lead='Projektujemy szybkie, nowoczesne strony dla firm. Każde zapytanie z formularza od razu trafia na Twój telefon, a klient dostaje automatyczną odpowiedź.',
@@ -48,7 +48,7 @@ PAGES = [
  dict(
   slug='sklep-internetowy', zrodlo='sklep',
   title='Sklep internetowy od 1 800 zł · ELOK',
-  desc='Sklep internetowy z płatnościami i wysyłkami od 1 800 zł netto. Połączenie z magazynem lub Allegro jako dodatek. Bezpłatna wycena w 1 dzień roboczy.',
+  desc='Sklep internetowy z płatnościami i wysyłkami od 1 800 zł netto. Połączenie z magazynem lub Allegro jako dodatek. Bezpłatna wycena w 24 godziny.',
   eye='Sklepy internetowe',
   h1='Sklep, który <span class="g">sprzedaje, a nie tylko wisi.</span>',
   lead='Robimy sklepy z płatnościami, wysyłkami i połączeniem z magazynem lub Allegro. Zamówienia, stany i dokumenty dzieją się same, a Ty zajmujesz się sprzedażą.',
@@ -110,9 +110,9 @@ def page(p):
     a('<span class="eye">%s</span><h1>%s</h1><p class="lead">%s</p>' % (p['eye'], p['h1'], p['lead']))
     a('<div class="price"><b>%s</b><span>%s</span></div>' % p['price'])
     a('<ul class="ticks">' + ''.join('<li>%s<span>%s</span></li>' % (TICK, t) for t in p['ticks']) + '</ul>')
-    a('<div class="ctas"><a class="btn pri" href="#wycena">Wycena w 1 dzień roboczy</a><a class="btn ghost" href="/konsultacja.html">Umów rozmowę online</a></div></div>')
+    a('<div class="ctas"><a class="btn pri" href="#wycena">Wycena w 24 godziny</a><a class="btn ghost" href="/konsultacja.html">Umów rozmowę online</a></div></div>')
     # form
-    a('<div class="fcard" id="wycena"><h2>Bezpłatna wycena</h2><p class="s">Zostaw telefon albo e-mail. Odezwiemy się z ceną w 1 dzień roboczy.</p>')
+    a('<div class="fcard" id="wycena"><h2>Bezpłatna wycena</h2><p class="s">Zostaw telefon albo e-mail. Odezwiemy się z wyceną w ciągu 24 godzin.</p>')
     a('<form id="lpform" data-zrodlo="%s" novalidate>' % p['zrodlo'])
     a('<label for="lp-co">Czego potrzebujesz?<select id="lp-co">' + ''.join('<option>%s</option>' % e(o) for o in p['co']) + '</select></label>')
     a('<label for="lp-imie">Imię<input id="lp-imie" autocomplete="name" placeholder="np. Marek" required></label>')
@@ -120,7 +120,7 @@ def page(p):
     a('<input type="hidden" id="lp-firma" value=""><input type="text" id="lp-www2" class="hpf" tabindex="-1" autocomplete="off" aria-hidden="true">')
     a('<button class="btn gold" type="submit">Poproś o bezpłatną wycenę</button><div class="ferr" id="lperr" role="alert" hidden></div>')
     a('<p class="note">Wysyłając, zgadzasz się na kontakt w sprawie wyceny. Szczegóły: <a href="/polityka-prywatnosci.html">polityka prywatności</a>.</p></form>')
-    a('<div class="fdone" id="lpdone">%s<h3>Dziękujemy, mamy Twoje zapytanie.</h3><p>Odezwiemy się w 1 dzień roboczy. Jeśli wolisz porozmawiać od razu, wybierz termin rozmowy.</p><a class="btn ghost" href="/konsultacja.html">Umów rozmowę online</a></div></div>' % TICK.replace('<svg ', '<svg style="width:54px;height:54px" '))
+    a('<div class="fdone" id="lpdone">%s<h3>Dziękujemy, mamy Twoje zapytanie.</h3><p>Odezwiemy się w ciągu 24 godzin. Jeśli wolisz porozmawiać od razu, wybierz termin rozmowy.</p><a class="btn ghost" href="/konsultacja.html">Umów rozmowę online</a></div></div>' % TICK.replace('<svg ', '<svg style="width:54px;height:54px" '))
     a('</div></section>')
     # problemy
     a('<section class="s"><div class="w"><div class="sh"><small>Znasz to?</small><h2 class="t">Z czym przychodzą do nas firmy</h2></div><div class="g3">')
@@ -147,7 +147,7 @@ def page(p):
         a('<details><summary>%s</summary><p>%s</p></details>' % (q, ans))
     a('</div></div></section>')
     # final
-    a('<section class="s" style="padding-top:0"><div class="w"><div class="final"><div><h2>%s</h2><p>Bezpłatnie i bez zobowiązań. Odpowiadamy w 1 dzień roboczy.</p></div><div class="ctas"><a class="btn gold" href="#wycena">Poproś o wycenę</a><a class="btn ghost" href="tel:+48455505820">455 505 820</a></div></div></div></section>' % p['final'])
+    a('<section class="s" style="padding-top:0"><div class="w"><div class="final"><div><h2>%s</h2><p>Bezpłatnie i bez zobowiązań. Odpowiadamy w ciągu 24 godzin.</p></div><div class="ctas"><a class="btn gold" href="#wycena">Poproś o wycenę</a><a class="btn ghost" href="tel:+48455505820">455 505 820</a></div></div></div></section>' % p['final'])
     a('</main>')
     a('<footer class="lf"><div class="w"><span>© 2026 ELOK · polska spółka · faktura VAT</span><span><a href="/">elok-agency.pl</a> · <a href="/polityka-prywatnosci.html">Polityka prywatności</a> · <a href="/cookies.html">Cookies</a> · <a href="#" data-cookies>Ustawienia cookies</a></span></div></footer>')
     a('<div class="mbar"><a class="btn ghost" href="tel:+48455505820">Zadzwoń</a><a class="btn pri" href="#wycena">Bezpłatna wycena</a></div>')
