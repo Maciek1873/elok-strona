@@ -28,3 +28,19 @@
   x.onload=function(){var r=null;try{r=JSON.parse(x.responseText);}catch(e){}if(r&&r.ok){ok();return;}fail(r&&r.error?r.error:null);};
   x.onerror=x.ontimeout=function(){fail();};x.send(body);});
 })();
+/* Promocja dla pierwszych klientów: liczba miejsc i rabat ustawiane w panelu (Podłączenia), zapisywane w /ustawienia.js */
+(function(){
+ function run(c){
+  var left=+c.promo||0,max=+c.promoMax||5,rab=+c.promoRabat||50;if(left<1||rab<1||rab>90)return;
+  function fmt(n){n=Math.round(n);var s=String(n);return s.length>3?s.slice(0,-3)+' '+s.slice(-3):s;}
+  function word(n){if(n===1)return 'Zostało 1 miejsce';var d=n%10,t=n%100;return (d>=2&&d<=4&&(t<12||t>14))?'Zostały '+n+' miejsca':'Zostało '+n+' miejsc';}
+  var L=document.querySelectorAll('.price b,.pbox b');
+  for(var i=0;i<L.length;i++){var b=L[i],m=b.textContent.match(/od\s*([\d\s ]+)\s*zł/);if(!m)continue;
+   var n=parseInt(m[1].replace(/\D/g,''),10);if(!n)continue;
+   b.innerHTML='od '+fmt(n*(100-rab)/100)+' zł <s class="lp-old">'+fmt(n)+' zł</s>';}
+  var txt='<b>-'+rab+'% dla '+max+' pierwszych firm.</b> '+word(left)+'. W zamian prosimy o opinię w Google i zgodę na pokazanie realizacji.';
+  var P=document.querySelectorAll('.hero .price,.pbox b');
+  for(var j=0;j<P.length;j++){var d=document.createElement('div');d.className='lp-promo';d.innerHTML=txt;P[j].parentNode.insertBefore(d,P[j]);}
+ }
+ {try{var x=new XMLHttpRequest();x.open('GET','/ustawienia.js?n='+Date.now());x.onload=function(){var m=x.responseText.match(/ELOK_CFG=(\{.*\});/);if(m){try{run(JSON.parse(m[1]));}catch(e){}}};x.send();}catch(e){}}
+})();

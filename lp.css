@@ -151,3 +151,9 @@ footer.lf a{color:var(--mut)}
  .fcard h2{font-size:22px}
  .fcard p.s{margin-bottom:8px}
 }
+/* promocja dla pierwszych klientów */
+.lp-promo{background:var(--golds);border:1px solid #E6D6BC;border-radius:12px;padding:10px 14px;margin:0 0 14px;font-size:14.5px;line-height:1.45;color:var(--fg)}
+.lp-promo b{color:var(--gold2)}
+.pbox .lp-promo{margin:6px 0 10px;font-size:13.5px}
+s.lp-old{font-size:.5em;color:var(--dim);font-weight:600;margin-left:6px;text-decoration-thickness:2px}
+@media(max-width:640px){.hero .lp-promo{font-size:13.5px;padding:8px 12px;margin-bottom:10px}}
