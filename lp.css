@@ -155,5 +155,9 @@ footer.lf a{color:var(--mut)}
 .lp-promo{background:var(--golds);border:1px solid #E6D6BC;border-radius:12px;padding:10px 14px;margin:0 0 14px;font-size:14.5px;line-height:1.45;color:var(--fg)}
 .lp-promo b{color:var(--gold2)}
 .pbox .lp-promo{margin:6px 0 10px;font-size:13.5px}
-s.lp-old{font-size:.5em;color:var(--dim);font-weight:600;margin-left:6px;text-decoration-thickness:2px}
+.lp-was{display:flex;align-items:center;gap:8px;font-size:.55em;margin:0 0 2px;font-weight:700;letter-spacing:0}
+.lp-was s{color:var(--dim);text-decoration:none;position:relative;display:inline-block}
+.lp-was s:after{content:"";position:absolute;left:-3px;right:-3px;top:52%;height:3px;background:#C0392B;border-radius:2px;transform:rotate(-8deg)}
+.lp-was i{font-style:normal;background:#C0392B;color:#fff;border-radius:6px;padding:2px 8px;font-size:.75em}
+.price b,.pbox b{display:block}
 @media(max-width:640px){.hero .lp-promo{font-size:13.5px;padding:8px 12px;margin-bottom:10px}}

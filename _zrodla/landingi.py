@@ -3,7 +3,7 @@
 # Uruchom: python3 _zrodla/landingi.py  (z katalogu repo)
 import os, html
 
-V = '2611131000'
+V = '2611131100'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>'
 IC = {

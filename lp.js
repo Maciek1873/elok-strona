@@ -37,8 +37,8 @@
   var L=document.querySelectorAll('.price b,.pbox b');
   for(var i=0;i<L.length;i++){var b=L[i],m=b.textContent.match(/od\s*([\d\s ]+)\s*zł/);if(!m)continue;
    var n=parseInt(m[1].replace(/\D/g,''),10);if(!n)continue;
-   b.innerHTML='od '+fmt(n*(100-rab)/100)+' zł <s class="lp-old">'+fmt(n)+' zł</s>';}
-  var txt='<b>-'+rab+'% dla '+max+' pierwszych firm.</b> '+word(left)+'. W zamian prosimy o opinię w Google i zgodę na pokazanie realizacji.';
+   b.innerHTML='<span class="lp-was"><s>'+fmt(n)+' zł</s><i>-'+rab+'%</i></span>od '+fmt(n*(100-rab)/100)+' zł';}
+  var txt='<b>-'+rab+'% dla '+max+' pierwszych firm.</b> '+word(left)+'. W zamian tylko zgoda na pokazanie realizacji w naszym portfolio.';
   var P=document.querySelectorAll('.hero .price,.pbox b');
   for(var j=0;j<P.length;j++){var d=document.createElement('div');d.className='lp-promo';d.innerHTML=txt;P[j].parentNode.insertBefore(d,P[j]);}
  }
