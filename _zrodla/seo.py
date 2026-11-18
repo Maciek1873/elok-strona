@@ -36,7 +36,7 @@ META = {
  'realizacje.html': (None, 'Case studies ELOK: aplikacja do Allegro, system wycen dla serwisu, zautomatyzowany sklep z częściami i panel finansowy. Zobacz, jak działają nasze wdrożenia.'),
  'kontakt.html': (None, 'Kontakt z ELOK: telefon +48 455 505 820, kontakt@elok-agency.pl, Konstancin-Jeziorna. Pracujemy z firmami z całej Polski, zdalnie. Umów bezpłatną konsultację.'),
  'o-nas.html': (None, 'ELOK to zespół, który buduje automatyzacje, systemy, strony i kampanie reklamowe dla firm. Zobacz, jak pracujemy i co już zrobiliśmy dla klientów.'),
- 'cennik.html': (None, 'Cennik ELOK: automatyzacje od 600 zł, strony od 1 500 zł, sklepy od 2 500 zł, reklamy od 700 zł miesięcznie. Ceny netto, stała cena ustalona przed startem.'),
+ 'cennik.html': (None, 'Cennik ELOK: automatyzacje od 600 zł, strony od 800 zł, sklepy od 1 800 zł, reklamy od 700 zł miesięcznie. Ceny netto, stała cena ustalona przed startem.'),
  'automatyzacja-ai/index.html': (None, 'Wdrażamy automatyzacje i AI w firmach: faktury, maile, oferty, zamówienia i raporty, które robią się same. Automatyzacje od 600 zł netto. Bezpłatna konsultacja.'),
 }
 SERVICES = {
@@ -46,11 +46,18 @@ SERVICES = {
  'strona-dla-firmy/index.html': ('Strona internetowa dla firmy', 'Strona internetowa'),
  'automatyzacja-ai/index.html': ('Automatyzacja i AI w firmie', 'Automatyzacja procesów biznesowych'),
  'sklep-internetowy/index.html': ('Sklep internetowy', 'Sklep internetowy'),
+ 'system-dla-serwisu-samochodowego.html': ('System do wycen dla serwisu samochodowego', 'Oprogramowanie dla serwisu samochodowego'),
+ 'automatyzacja-allegro.html': ('Automatyzacja sprzedaży na Allegro', 'Automatyzacja procesów biznesowych'),
+ 'integracja-sklepu-z-hurtownia.html': ('Integracja sklepu internetowego z hurtownią', 'Integracja systemów'),
+ 'strona-dla-warsztatu-samochodowego.html': ('Strona internetowa dla warsztatu samochodowego', 'Strona internetowa'),
+ 'dedykowany-system-dla-firmy.html': ('Dedykowany system dla firmy', 'Oprogramowanie na zamówienie'),
+ 'strony-internetowe-konstancin-piaseczno.html': ('Strony internetowe i automatyzacje w Konstancinie-Jeziornie i Piasecznie', 'Strona internetowa'),
 }
 CRUMB = {'strony.html':'Strony i sklepy','automatyzacje.html':'Automatyzacje','marketing.html':'Marketing','cennik.html':'Cennik',
  'o-nas.html':'O nas','kontakt.html':'Kontakt','konsultacja.html':'Konsultacja','blog.html':'Blog','realizacje.html':'Case studies',
  'regulamin.html':'Regulamin','cookies.html':'Cookies','polityka-prywatnosci.html':'Polityka prywatności',
- 'strona-dla-firmy/index.html':'Strona dla firmy','automatyzacja-ai/index.html':'Automatyzacja i AI','sklep-internetowy/index.html':'Sklep internetowy'}
+ 'strona-dla-firmy/index.html':'Strona dla firmy','automatyzacja-ai/index.html':'Automatyzacja i AI','sklep-internetowy/index.html':'Sklep internetowy',
+ 'system-dla-serwisu-samochodowego.html':'System dla serwisu samochodowego','automatyzacja-allegro.html':'Automatyzacja Allegro','integracja-sklepu-z-hurtownia.html':'Integracja sklepu z hurtownią','strona-dla-warsztatu-samochodowego.html':'Strona dla warsztatu','dedykowany-system-dla-firmy.html':'Dedykowany system dla firmy','strony-internetowe-konstancin-piaseczno.html':'Konstancin-Jeziorna i Piaseczno'}
 
 def txt(x): return html.unescape(re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', x))).strip()
 def url_of(f): return B + '/' + (f[:-len('index.html')] if f.endswith('index.html') else f)
@@ -112,7 +119,7 @@ SKIP = {'404.html', 'demo.html'}
 files = [f for f in glob.glob('*.html') if f not in SKIP] + [d + '/index.html' for d in ('strona-dla-firmy', 'automatyzacja-ai', 'sklep-internetowy') if os.path.exists(d + '/index.html')]
 for f in sorted(files):
     s = open(f, encoding='utf-8').read()
-    if 'noindex' in s: continue
+    if 'noindex' in s or '<title>' not in s: continue
     s = setmeta(s, f)
     s = re.sub(r'<!--seo-ld-->.*?<!--/seo-ld-->', '', s, flags=re.S)
     ld = '<!--seo-ld--><script type="application/ld+json">' + json.dumps(graph(s, f), ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script><!--/seo-ld-->'
