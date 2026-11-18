@@ -1,11 +1,12 @@
 # Wgrywanie strony na serwer LH.pl
 #  - gałąź "test" → test.elok-agency.pl
 #  - gałąź "main" → elok-agency.pl (po zatwierdzeniu w panelu)
+#  - gałęzie "szkic-*" → test.elok-agency.pl/szkic/ (podgląd szkiców, nie trafiają do "Zatwierdź")
 # Hasła: Settings → Secrets and variables → Actions → FTP_USER, FTP_PASSWORD
 name: Wgraj strone
 on:
   push:
-    branches: [main, test]
+    branches: [main, test, 'szkic-*']
   workflow_dispatch:
 concurrency: deploy-${{ github.ref_name }}
 jobs:
@@ -22,7 +23,7 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          server-dir: ${{ github.ref_name == 'main' && './elok-agency.pl/' || './test.elok-agency.pl/' }}
+          server-dir: ${{ github.ref_name == 'main' && './elok-agency.pl/' || (github.ref_name == 'test' && './test.elok-agency.pl/' || './test.elok-agency.pl/szkic/') }}
           exclude: |
             **/.git*
             **/.git*/**
@@ -38,7 +39,7 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          server-dir: ${{ github.ref_name == 'main' && './elok-agency.pl/' || './test.elok-agency.pl/' }}
+          server-dir: ${{ github.ref_name == 'main' && './elok-agency.pl/' || (github.ref_name == 'test' && './test.elok-agency.pl/' || './test.elok-agency.pl/szkic/') }}
           exclude: |
             **/.git*
             **/.git*/**
