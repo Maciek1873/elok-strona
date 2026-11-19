@@ -327,3 +327,15 @@ footer.lf a{color:var(--mut)}
  .step{padding-top:10px}.step b{font-size:17px;margin:2px 0}.step span{font-size:13.5px;line-height:1.4;display:block}.step small{font-size:13px}
  .faq summary,details summary{padding-top:14px;padding-bottom:14px}
 }
+/* telefon v2: bez przewijania w bok, spokojniejsze pojawianie się, ładniejszy wybór tematu */
+@media(max-width:640px){
+ .lp-anim .rv{transform:translateY(8px);transition:opacity .35s ease,transform .35s ease;transition-delay:0s!important}
+ .g3{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:0;padding:0;overflow:visible;scroll-snap-type:none}
+ .g3>.pc{flex:none;display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:14px;row-gap:4px;align-items:center;padding:16px;border-radius:16px}
+ .g3>.pc i{grid-row:span 2;align-self:start;width:40px;height:40px}
+ .g3>.pc h3{font-size:17px}
+ .g3>.pc p{grid-column:2;font-size:14px;line-height:1.45}
+ .chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:0;overflow:visible}
+ .chip{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;padding:8px 10px;border-radius:12px;font-size:13.5px;line-height:1.25;white-space:normal}
+ .chip.on{box-shadow:0 6px 16px -8px rgba(0,0,0,.45)}
+}
