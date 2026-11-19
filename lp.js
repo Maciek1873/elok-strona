@@ -5,6 +5,9 @@
  if(/^test\./.test(location.hostname)){var h=document.querySelector('.lh');if(h)h.style.top='32px';}
  /* klik w numer telefonu: zdarzenie w statystykach */
  document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href^="tel:"]'):null;if(!a)return;try{if(window.gtag)gtag('event','klik_telefon');if(window.elokEv)elokEv('klik_telefon');}catch(x){}});
+ /* wybór tematu jako przyciski */
+ [].forEach.call(document.querySelectorAll('.chips'),function(g){var h=document.getElementById('lp-co');g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
+  [].forEach.call(g.querySelectorAll('.chip'),function(c){c.classList.toggle('on',c===b);c.setAttribute('aria-pressed',c===b?'true':'false');});if(h)h.value=b.textContent;});});
  var f=document.getElementById('lpform');if(!f)return;
  var API='https://panel.elok-agency.pl/strona/',LIVE=/^(www\.)?elok-agency\.pl$/.test(location.hostname);
  var err=document.getElementById('lperr'),done=document.getElementById('lpdone'),btn=f.querySelector('button[type=submit]'),t0=Math.floor(Date.now()/1000);
@@ -16,11 +19,13 @@
   var y=done.getBoundingClientRect().top+(window.pageYOffset||0)-100;window.scrollTo(0,y);}
  f.addEventListener('submit',function(e){e.preventDefault();err.hidden=true;
   var req=[].filter.call(f.querySelectorAll('[required]'),function(i){return !i.value.trim();});if(req.length){req[0].focus();return;}
-  var k=v('lp-kontakt'),isMail=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(k),isTel=k.replace(/\D/g,'').length>=9;
-  if(!isMail&&!isTel){show('Wpisz numer telefonu (9 cyfr) albo adres e-mail.');document.getElementById('lp-kontakt').focus();return;}
+  var tel=v('lp-tel'),mail=v('lp-mail'),isTel=tel.replace(/\D/g,'').length>=9,isMail=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail);
+  if(!tel&&!mail){show('Wpisz telefon albo e-mail, wystarczy jedno.');document.getElementById('lp-tel').focus();return;}
+  if(tel&&!isTel){show('Numer telefonu powinien mieć 9 cyfr.');document.getElementById('lp-tel').focus();return;}
+  if(mail&&!isMail){show('Sprawdź adres e-mail.');document.getElementById('lp-mail').focus();return;}
   if(!LIVE){ok();return;}
   var opis='[Landing: '+src+'] '+(v('lp-co')?'Temat: '+v('lp-co')+'. ':'')+(isTel&&!isMail?'Woli kontakt telefoniczny.':'');
-  var data={a:'kontakt',imie:v('lp-imie'),email:isMail?k:'',telefon:isMail?'':k,firma:v('lp-firma'),opis:opis,www2:v('lp-www2'),ts:t0};
+  var data={a:'kontakt',imie:v('lp-imie'),email:isMail?mail:'',telefon:isTel?tel:'',firma:v('lp-firma'),opis:opis,www2:v('lp-www2'),ts:t0};
   var body=Object.keys(data).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(data[k]);}).join('&');
   var old=btn.innerHTML;btn.disabled=true;btn.innerHTML='Wysyłam…';
   var x=new XMLHttpRequest();x.open('POST',API);x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');x.timeout=20000;

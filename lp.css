@@ -174,3 +174,32 @@ footer.lf a{color:var(--mut)}
 .lp-rc img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
 .lp-rc span{display:block;padding:10px 12px;font-weight:600;font-size:14px;line-height:1.3}
 @media(max-width:640px){.lp-rt{grid-auto-columns:78%}.lp-rc span{font-size:15px}}
+
+/* Wybór tematu jako przyciski, telefon i e-mail obok siebie */
+.fcard .flab{font-size:14px;font-weight:600;margin:12px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14.5px;font-weight:600;color:var(--fg);background:var(--bg2);border:1px solid var(--line2);border-radius:999px;padding:9px 14px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.chip:hover{border-color:var(--gold)}
+.chip.on{background:var(--fg);border-color:var(--fg);color:#fff}
+.chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fcard .fhint{font-size:13px;color:var(--dim);margin:6px 0 0}
+@media(max-width:420px){.f2{grid-template-columns:1fr}}
+/* Sekcja końcowa: jasna, z naszymi realizacjami */
+.endsec{padding-top:24px}
+.endbox{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:40px;align-items:center;border-radius:28px;padding:clamp(28px,5vw,56px);
+ background:radial-gradient(120% 140% at 100% 0%,#F3E7D3 0%,rgba(243,231,211,0) 55%),linear-gradient(180deg,#FFFFFF,#F8F5EF);border:1px solid #EADFCC;box-shadow:0 40px 80px -50px rgba(60,40,10,.35)}
+.eb-l small{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2)}
+.eb-l h2{font-family:var(--f-d);font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.06;letter-spacing:-.025em;margin:10px 0 18px;text-wrap:balance}
+.eb-t{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:8px}
+.eb-t li{position:relative;padding-left:28px;color:var(--mut)}
+.eb-t li:before{content:"";position:absolute;left:0;top:.35em;width:18px;height:18px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4L18 8'/%3E%3C/svg%3E") center/12px no-repeat}
+.eb-r{position:relative;height:320px}
+.eb-r img{position:absolute;width:68%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:16px;border:1px solid rgba(0,0,0,.06);box-shadow:0 24px 50px -20px rgba(40,25,5,.45);background:#fff;transition:transform .4s}
+.eb-r img:nth-child(1){left:0;top:8%;transform:rotate(-6deg);z-index:1}
+.eb-r img:nth-child(2){right:0;top:0;transform:rotate(5deg);z-index:2}
+.eb-r img:nth-child(3){left:18%;bottom:0;transform:rotate(-1deg);z-index:3}
+.endbox:hover .eb-r img:nth-child(1){transform:rotate(-8deg) translateX(-6px)}
+.endbox:hover .eb-r img:nth-child(2){transform:rotate(7deg) translateX(6px)}
+@media(max-width:980px){.endbox{grid-template-columns:minmax(0,1fr)}.eb-r{height:240px;order:-1}}
+@media(max-width:640px){.eb-r{height:190px}.endbox .ctas .btn{width:100%}}
