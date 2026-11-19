@@ -44,7 +44,7 @@
    var n=parseInt(m[1].replace(/\D/g,''),10);if(!n)continue;
    b.innerHTML='<span class="lp-was"><s>'+fmt(n)+' zł</s><i>-'+rab+'%</i></span>od '+fmt(n*(100-rab)/100)+' zł';}
   var txt='<b>-'+rab+'% dla '+max+' pierwszych firm.</b> '+word(left)+'. W zamian tylko zgoda na pokazanie realizacji w naszym portfolio.';
-  var P=document.querySelectorAll('.hero .price,.pbox b');
+  var P=document.querySelectorAll('.hero .price');
   for(var j=0;j<P.length;j++){var d=document.createElement('div');d.className='lp-promo';d.innerHTML=txt;P[j].parentNode.insertBefore(d,P[j]);}
  }
  {try{var x=new XMLHttpRequest();x.open('GET','/ustawienia.js?n='+Date.now());x.onload=function(){var m=x.responseText.match(/ELOK_CFG=(\{.*\});/);if(m){try{run(JSON.parse(m[1]));}catch(e){}}};x.send();}catch(e){}}
@@ -54,7 +54,7 @@
  var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
  document.documentElement.classList.add('lp-anim');
  /* 1. elementy wjeżdżają, gdy pojawiają się na ekranie */
- var els=document.querySelectorAll('.sh,.pc,.incl,.pbox,.case,.faq details,.endbox,.lp-rc,.ticks li');
+ var els=document.querySelectorAll('.sh,.pc,.tile,.pbox,.how-img,.how-flow,.faq details,.endbox,.lp-rc,.ticks li');
  [].forEach.call(els,function(e,i){e.classList.add('rv');var p=e.parentNode,k=[].indexOf.call(p.children,e);e.style.transitionDelay=Math.min(k,5)*70+'ms';});
  if(RM||!('IntersectionObserver' in window)){[].forEach.call(els,function(e){e.classList.add('in');});}
  else{var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px'});[].forEach.call(els,function(e){io.observe(e);});}

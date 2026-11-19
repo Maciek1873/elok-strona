@@ -238,3 +238,39 @@ footer.lf a{color:var(--mut)}
 .lp-rc:hover:after{opacity:1;transform:none}
 .lp-rc:hover span{color:var(--gold2)}
 .lp-anim .lp-rc.rv.in{transition-delay:0s}
+/* Co dostajesz: kafelki z ikonami + pasek ceny */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:12px;align-content:start;transition:transform .25s,box-shadow .25s,border-color .25s}
+.tile:hover{transform:translateY(-4px);box-shadow:0 18px 34px -20px rgba(40,25,5,.35);border-color:#E3D3B8}
+.tile i{width:44px;height:44px;border-radius:13px;background:var(--golds);color:var(--gold2);display:grid;place-items:center;transition:background .25s,color .25s}
+.tile:hover i{background:var(--fg);color:var(--gold)}
+.tile i svg{width:22px;height:22px}
+.tile span{font-weight:600;line-height:1.35}
+.pbox{margin-top:16px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;background:#fff;color:var(--fg);border:1px solid #EADFCC;border-left:5px solid var(--gold);border-radius:18px;padding:22px 26px}
+.pbox .pb-l{display:grid;gap:2px}
+.pbox small{color:var(--gold2);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.pbox b{font-family:var(--f-d);font-size:38px;line-height:1.05;letter-spacing:-.02em;color:var(--fg)}
+.pbox p{margin:0;color:var(--mut);font-size:15.5px;flex:1;min-width:220px}
+.pbox .btn{margin:0}
+@media(max-width:980px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.tile{padding:16px}.pbox{padding:20px}.pbox .btn{width:100%}}
+/* Jak to działa: zrzut realizacji + animowane kroki */
+.how{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:34px;align-items:center}
+.how-img{display:block;position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -36px rgba(40,25,5,.45);text-decoration:none;color:inherit;background:#fff}
+.how-img img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.how-img:hover img{transform:scale(1.04)}
+.how-img span{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:14px 18px;font-weight:700;border-top:1px solid var(--line)}
+.how-img em{font-style:normal;color:var(--gold2);font-weight:600}
+.how-flow{position:relative;display:grid;gap:18px;padding-left:4px}
+.how-line{position:absolute;left:25px;top:26px;bottom:26px;width:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.how-line u{position:absolute;left:0;right:0;top:0;height:0;background:var(--gold);animation:howLine 6s ease-in-out infinite}
+.st{position:relative;display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px 14px 12px;animation:howSt 6s ease-in-out infinite;animation-delay:calc(var(--i)*1.5s)}
+.st b{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--bg2);border:2px solid var(--line2);font-family:var(--f-d);font-size:17px;z-index:1;animation:howDot 6s ease-in-out infinite;animation-delay:calc(var(--i)*1.5s)}
+.st strong{display:block;font-size:17px;line-height:1.25}
+.st span{display:block;color:var(--mut);font-size:14.5px}
+@keyframes howLine{0%{height:0}75%,90%{height:100%}100%{height:100%;opacity:0}}
+@keyframes howSt{0%,100%{box-shadow:none;border-color:var(--line);transform:none}12%,30%{box-shadow:0 16px 34px -18px rgba(40,25,5,.4);border-color:#E3D3B8;transform:translateX(6px)}}
+@keyframes howDot{0%,100%{background:var(--bg2);border-color:var(--line2);color:var(--fg)}12%,30%{background:var(--fg);border-color:var(--fg);color:var(--gold)}}
+@media(max-width:980px){.how{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.how-line u,.st,.st b{animation:none}.how-line u{height:100%}}
+@media(max-width:640px){.tiles{grid-template-columns:minmax(0,1fr);gap:8px}.tile{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px}.tile i{width:38px;height:38px;flex:none;border-radius:11px}.tile i svg{width:19px;height:19px}.tile span{font-size:15.5px}}
